@@ -3864,7 +3864,7 @@ p {
 
 blockquote {
   font-size: 1.2rem;
-  font-style: italic;
+  /* font-style: italic; */
   border-left: 3px solid #c25b6c;
   padding-left: 2rem;
   margin: 0 0 1.75rem;

@@ -4290,7 +4290,7 @@ cite {
 
 .post header .post_meta {
   display: inline-block;
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
   padding: 0.5rem 1rem;
   font-size: 1.1rem;
   margin: 0;

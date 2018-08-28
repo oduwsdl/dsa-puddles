@@ -13,9 +13,8 @@ layout: default
         <h1 class="post_title">{{page.title}}</h1>
         <p class="post_meta">
         Collection {{page.collection_id}} from {{page.source_archive}}<br>
-        Mementos selected by {{ page.summarization_method }}<br>
-        Visualized as {{page.surrogate}}<br>
-        Created {{page.date | date: '%B %d, %Y'}}
+        Mementos selected by {{ page.summarization_method }} on {{ page.summarization_date | date: '%b %d, %Y'}}<br>
+        Visualized as {{page.surrogate}} on {{ page.date | date: '%b %d, %Y'}}
       </p>
       </div>
     </header> <!-- End Header -->

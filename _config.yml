@@ -9,7 +9,7 @@ baseurl: "/dsa-puddles" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 
 # Banner settings
-video:  Las_Vegas_Lightning_Storm.jpg # add banner video. Add your video file to the folder video
+video:  dark_puddle.jpg # add banner video. Add your video file to the folder video
 banner-title: Puddles # add banner title
 banner-desc: Visualizations from the Dark and Stormy Archives Project # add banner description
 

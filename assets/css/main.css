@@ -3980,6 +3980,14 @@ cite {
   color: #ffffff;
 }
 
+.title, .sub_title {
+	text-shadow:
+		-1px -1px 0 #000,
+		1px -1px 0 #000,
+		-1px 1px 0 #000,
+		1px 1px 0 #000;
+}
+
 #banner .content .title {
   font-size: 3.5rem;
   margin: 0 0 1rem 0;

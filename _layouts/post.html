@@ -7,7 +7,7 @@ layout: default
   <article class="post">
     <header>
       <div class="post_image">
-        <img src={{ "/assets/img/" | prepend: site.baseurl | append : page.img}} alt="{{page.title}}">
+        <img src="{{page.img}}"" alt="{{page.title}}">
       </div>
       <div class="post_description">
         <h1 class="post_title">{{page.title}}</h1>
@@ -29,7 +29,6 @@ layout: default
           <span>Share:</span>
           <a href="https://twitter.com/intent/tweet?text={{ page.title }}&url={{ site.url }}{{ page.url }}" title="Share on Twitter" rel="nofollow" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>
           <a href="https://facebook.com/sharer.php?u={{ site.url }}{{ page.url }}" title="Share on Facebook" rel="nofollow" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-          <a href="https://plus.google.com/share?url={{ site.url }}{{ page.url }}" title="Share on Google+" rel="nofollow" target="_blank"><i class="fa fa-google" aria-hidden="true"></i></a>
         </div>
       </footer>
     </div>
@@ -38,29 +37,14 @@ layout: default
   <section class="author cf">
     <div class="post_wrapper">
       <div class="author_image">
-        <img src="{{site.baseurl}}/assets/img/{% if site.author-pic %}{{ site.author-pic }}{% endif %}" alt="Author face">
+        <img src="{{site.baseurl}}/assets/img/dsa-logo-monochrome-wb.png" alt="Author face">
       </div>
       <div class="author_info">
-        <h2 class="author_title">{% if site.author-name %}{{site.author-name}}{% else %}Dwayne Newman{% endif %}</h2>
-        <p class="author_subtitle">{% if site.about-author %}{{site.about-author}}{% else %}La croix godard blue bottle, vape iceland fingerstache cronut single-origin coffee lyft snackwave normcore small batch.{% endif %}</p>
+        <h2 class="author_title">{{site.author-name}}</h2>
+        <p class="author_subtitle">Visit the <a href="https://oduwsdl.github.io/dsa/">Dark and Stormy Archives (DSA) project web site</a> for information on research, software, and more that supports storytelling with web archives.</p>
       </div>
     </div>
   </section> <!-- End Section Author -->
-
-  <!-- <section class="recent_box">
-    <div class="post_wrapper">
-      <h2 class="recent_title">Recent post</h2>
-      <div class="recent_list">
-        {% for post in site.posts offset:0 limit:6 %}
-          {% if post.title %}
-            <a href="{{ root_url }}{{ post.url }}" class="recent_item" style="background-image: url( {{ "/assets/img/" | prepend: site.baseurl | append : post.img}} )"><span>{{ post.title }}</span></a>
-          {% endif %}
-        {% endfor %}
-      </div>
-    </div>
-  </section> End Section Recent Box -->
-  
-  {% include disqus.html %}
   
 </main> <!-- End Section Post Content -->
 

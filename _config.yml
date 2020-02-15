@@ -10,18 +10,18 @@ url: "" # the base hostname & protocol for your site, e.g. http://example.com
 
 # Banner settings
 video:  dark_puddle.jpg # add banner video. Add your video file to the folder video
-banner-title: Puddles # add banner title
+banner-title: DSA Puddles # add banner title
 banner-desc: Visualizations from the Dark and Stormy Archives Project # add banner description
 
 # Author settings
-author-pic: stormcloud.png # face.jpg # your photo
-author-name: Dark and Stormy Archives Project # your name
-about-author: Producing Visualizations to Summarize Web Archive Collections  # about author
+author-pic: https://oduwsdl.github.io/dsa/img/dsa-logo-monochrome-wbg.png # face.jpg # your photo
+author-name: Dark and Stormy Archives - Puddles # your name
+about-author: Producing Visualizations to Summarize Web Archive Collections
 email: jones.shawn.m@gmail.com # your email
-phone: (496)-169-6557 # your pnone number
-website: https://dwayne.example.com # you website
+# phone: (496)-169-6557 # your pnone number
+website: https://oduwsdl.github.io/dsa # you website
 
-logo: Puddles
+logo:
 
 # Social link
 # google_url:    # add url link

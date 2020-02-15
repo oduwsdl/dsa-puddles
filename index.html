@@ -2,18 +2,26 @@
 layout: main
 ---
 
+<style>
+  img.blurimage {
+    -webkit-filter: grayscale(50%) blur(10px); /* Safari 6.0 - 9.0 */
+    filter: grayscale(50%) blur(10px);
+  }
+</style>
+
 {% for post in paginator.posts %}
   <div class="chapter">
     <a href="{{post.url | prepend: site.baseurl}}">
       {% if post.img %}
-      <!-- <img src={{ "/assets/img/" | prepend: site.baseurl | append: post.img }} alt="{{post.title}}"> -->
-      <img src={{ "/assets/img/collection_card_bg.png" | prepend: site.baseurl }} alt="{{post.title}}">
+      <img class="blurimage" src="{{post.img}}" alt="{{post.title}}">
+      <!-- <img src={{ "/assets/img/collection_card_bg.png" | prepend: site.baseurl }} alt="{{post.title}}"> -->
+      <!-- <img class="blurimage" src="http://wayback.archive-it.org/2358/20110222062618/http:/www.18daysinegypt.com/img/picture2.jpg" > -->
       {% endif %}
     
     <div class="chapter_inner">
       <p class="chapter_number">{{post.date | date: '%Y, %b %d'}}</p>
       <h3 class="chapter_title">{{post.title}}</h3>
-      <p>{{post.source_archive}} Collection {{post.collection_id}}<br>
+      <p class="chapter_number">{{post.source_archive}} Collection {{post.collection_id}}<br>
         Mementos selected by {{post.summarization_method}}<br>
       Visualized as {{post.surrogate}}
     </p>

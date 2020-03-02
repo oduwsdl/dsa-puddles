@@ -1,0 +1,247 @@
+---
+layout: post
+title: "{{ title }}"
+img: {{ story_image }}
+date: {{ generation_date }}
+permalink: /stories/{{ generation_date.strftime('%Y%m%d%H%M%S') }}/{{ title|lower|replace(' ', '_')|replace('/', '-') }}/
+categories: [storygraph]
+---
+
+<main class="post_content">
+  <article class="post">
+    <header>
+      <div class="post_image">
+          {% if story_image is not none %}
+        <img src="{{ story_image }}" alt="{{ title }}">
+        {% endif %}
+      </div>
+      <div class="post_description">
+        <h1 class="post_title">{{ title }}</h1>
+        <p class="post_meta">
+        Mementos selected by <a href="http://storygraph.cs.odu.edu/graphs/polar-media-consensus-graph/">Storygraph</a> on {{ generation_date.strftime('%Y/%m/%d') }}<br>
+      </p>
+      </div>
+    </header> <!-- End Header -->
+
+    <div class="entry_content">
+
+        {% for element in elements %}
+        <hr>
+        
+        {% if element.type == 'link' %}
+        
+        <blockquote 
+            class="mementoembed"
+            data-versionurl="{{ element.surrogate.urim }}"
+            data-originalurl="{{ element.surrogate.original_uri }}"
+            data-surrogate-creation-time="{{ element.surrogate.creation_time }}"
+            data-image="{{ element.surrogate.best_image_uri }}"
+            data-archive-name="{{ element.surrogate.archive_name }}"
+            data-archive-favicon="{{ element.surrogate.archive_favicon }}"
+            data-archive-uri="{{ element.surrogate.archive_uri }}"
+            data-archive-collection-id="{{ element.surrogate.archive_collection_id }}"
+            data-archive-collection-uri="{{ element.surrogate.archive_collection_uri }}"
+            data-archive-collection-name="{{ element.surrogate.archive_collection_name }}"
+            data-original-favicon="{{ element.surrogate.original_favicon }}"
+            data-original-domain="{{ element.surrogate.original_domain }}"
+            data-original-link-status="{{ element.surrogate.original_linkstatus }}"
+            data-versiondate="{{ element.surrogate.memento_datetime.strftime('%Y-%m-%dT%H:%M:%SZ') }}"
+            style="
+                width: 445px; 
+                font-size: 12px;
+                border: 1px solid rgb(231, 231, 231);
+                background: center center no-repeat fixed rgb(255, 255, 255);
+                margin: 0px;
+                padding: 0px;
+                min-height: 200px;
+                line-height: 19.6px;"
+                data-processed="true"
+                >
+            <div class="me-image" style="
+                color: rgb(51, 51, 51);
+                display: inline;
+                float: left;
+                margin: 0px 30px 5px 0px;
+                padding: 1px;
+                max-height: 96px;
+                max-width: 96px;
+                width: 96px;
+                background: center center no-repeat fixed rgb(255, 255, 255);"
+                >
+                <img
+                    style="max-width: 96px; max-height: 96px;"
+                    src="{{ element.surrogate.best_image_uri }}">
+            </div>
+            <div class="me-textright">
+                <p
+                    class="me-title"
+                    style="
+                        text-align: left;
+                        color: rgb(9, 116, 255);
+                        font-family: &quot;Museo Sans&quot;, &quot;Helvetica Neue&quot;, sans-serif;
+                        font-size: 14px;
+                        font-weight: 700;
+                        line-height: 19.6px;
+                        padding: 0px;
+                        margin: 0px 0px 1px;
+                        background: center center no-repeat fixed rgb(255, 255, 255);"
+                        >
+                        <a class="me-title-link"
+                            data-originalurl="{{ element.surrogate.original_uri }}"
+                            data-versiondate="{{ element.surrogate.memento_datetime.strftime('%Y-%m-%dT%H:%M:%SZ') }}"
+                            href="{{ element.surrogate.urim }}"
+                            style="
+                                text-decoration: none;
+                                color: rgb(9, 116, 255);
+                                background: center center no-repeat fixed rgb(255, 255, 255);
+                                margin: 0px;
+                                padding: 0px;
+                                ">{{ element.surrogate.title }}</a>
+                </p>
+                <div 
+                    class="me-belowtitle"
+                    style="
+                        color: rgb(153, 153, 153);
+                        font-family: &quot;Museo Sans&quot;, &quot;Helvetica Neue&quot;, sans-serif;
+                        font-size: 10px;
+                        text-align: left;
+                        margin: 0px;
+                        padding: 0px;
+                        background: center center no-repeat fixed rgb(255, 255, 255);">
+                        <img 
+                            class="me-favicon"
+                            src="{{ element.surrogate.archive_favicon }}"
+                            alt="{{ element.surrogate.archive_name }}"
+                            width="16"
+                            style="
+                                background: center center no-repeat fixed rgb(255, 255, 255);
+                                margin: 0px;
+                                padding: 0px;
+                                font-size: 10px;
+                                border-width: 0px;
+                                border-style: none;
+                                line-height: 15px;
+                                border-image-repeat: initial;
+                                border-image-width: 0;
+                                font-family: &quot;Museo Sans&quot;, &quot;Helvetica Neue&quot;, sans-serif;
+                                font-stretch: initial;
+                                font-weight: 400;
+                                vertical-align: middle;">
+                        &nbsp;&nbsp;Preserved by <a
+                            class="me-archive-link"
+                            href="{{ element.surrogate.archive_uri }}"
+                            style="
+                                text-decoration: none;
+                                color: rgb(9, 116, 255);
+                                background: center center no-repeat fixed rgb(255, 255, 255);
+                                margin: 0px;
+                                padding: 0px;">{{ element.surrogate.archive_name }}</a>
+                        {% if element.surrogate.archive_collection_name is not none %}
+                        <br>
+                        Member of the Collection 
+                        <a class="me-archive-link" style="
+                            text-decoration: none;
+                            color: rgb(9, 116, 255);
+                            background: center center no-repeat fixed rgb(255, 255, 255);
+                            margin: 0px;
+                            padding: 0px;"
+                            href="{{ element.surrogate.archive_collection_uri }}">{{ element.surrogate.archive_collection_name }}</a>
+                        {% endif %}
+                </div><br>
+                <p 
+                class="me-snippet"
+                style="
+                    color: rgb(51, 51, 51);
+                    font-family: &quot;Museo Sans&quot;, &quot;Helvetica Neue&quot;, sans-serif;
+                    font-size: 12px;
+                    line-height: 18px;
+                    text-align: left; margin: 0px;
+                    padding: 0px;
+                    background: center center no-repeat fixed rgb(255, 255, 255);">{{ element.surrogate.snippet }}</p>
+            </div>
+            <div 
+                class="me-footer" 
+                style="
+                    color: rgb(153, 153, 153);
+                    font-family: &quot;Museo Sans&quot;, &quot;Helvetica Neue&quot;, sans-serif;
+                    font-size: 10px;
+                    text-align:left;
+                    margin: 10px 0px 0px;
+                    padding: 10px 0px 0px;
+                    background: center center no-repeat fixed rgb(255, 255, 255);">&nbsp;&nbsp;
+                    <img
+                        class="me-favicon"
+                        src="{{ element.surrogate.original_favicon }}"
+                        width="16"
+                        style="
+                            background: center center no-repeat fixed rgb(255, 255, 255);
+                            margin: 0px;
+                            padding: 0px;
+                            font-size: 10px;
+                            border-width: 0px;
+                            border-style: none;
+                            line-height: 15px;
+                            border-image-repeat: initial;
+                            border-image-width: 0;
+                            font-family: &quot;Museo Sans&quot;, &quot;Helvetica Neue&quot;, sans-serif;
+                            font-stretch: initial;
+                            font-weight: 400;
+                            vertical-align: middle;">&nbsp;&nbsp;
+                    <a
+                        class="me-pubdate"
+                        data-originalurl="{{ element.surrogate.original_uri }}"
+                        data-versiondate="{{ element.surrogate.memento_datetime.strftime('%Y-%m-%dT%H:%M:%SZ') }}"
+                        href="{{ element.surrogate.urim }}"
+                        style="
+                            text-decoration: none;
+                            color: rgb(9, 116, 255);
+                            background: center center no-repeat fixed rgb(255, 255, 255);
+                            margin: 0px;
+                            padding: 0px;">{{ element.surrogate.original_domain }}&nbsp;&nbsp;@&nbsp;&nbsp;{{ element.surrogate.memento_datetime.strftime('%Y-%m-%dT%H:%M:%SZ') }}</a><br> &nbsp; 
+                    <a 
+                        class="me-allversions"
+                        href="http://timetravel.mementoweb.org/list/{{ element.surrogate.memento_datetime.strftime('%Y%m%d%H%M%S') }}Z/{{ element.surrogate.original_uri }}"
+                        style="
+                            text-decoration: none;
+                            color: rgb(9, 116, 255);
+                            background: center center no-repeat fixed rgb(255, 255, 255);
+                            margin: 0px;
+                            padding: 0px;">Other Versions</a>&nbsp; || 
+                    <a 
+                        class="me-livestatus"
+                        data-versionurl="{{ element.surrogate.urim }}" 
+                        data-versiondate="{{ element.surrogate.memento_datetime.strftime('%Y-%m-%dT%H:%M:%SZ') }}"
+                        href="{{ element.surrogate.original_uri }}"
+                        style="
+                            text-decoration: none;
+                            color: rgb(9, 116, 255);
+                            background: center center no-repeat fixed rgb(255, 255, 255);
+                            margin: 0px;
+                            padding: 0px;">Current version</a>
+            </div>
+        </blockquote>
+        
+        {% else %}
+        
+        <p>{{ element.text }}</p>
+        
+        {% endif %}
+        
+        {% endfor %}
+
+    </div>
+    
+
+  <section class="author cf">
+    <div class="post_wrapper">
+      <div class="author_image">
+        <img src="https://oduwsdl.github.io/dsa-puddles/assets/img/dsa-logo-monochrome-wb.png" alt="Author face">
+      </div>
+      <div class="author_info">
+        <h2 class="author_title">Dark and Stormy Archives - Puddles</h2>
+        <p class="author_subtitle">Visit the <a href="https://oduwsdl.github.io/dsa/">Dark and Stormy Archives (DSA) project web site</a> for information on research, software, and more that supports storytelling with web archives.</p>
+      </div>
+    </div>
+  </section> <!-- End Section Author -->
+  
+</main> <!-- End Section Post Content -->

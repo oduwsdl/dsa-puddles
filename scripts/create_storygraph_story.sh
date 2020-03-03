@@ -1,0 +1,48 @@
+#!/bin/bash
+
+set -e
+
+if [ -z $1 ]; then
+    working_directory=`mktemp -d -t storygraph-stories-`
+else
+    working_directory=$1
+    mkdir -p ${working_directory}
+fi
+
+echo "`date` --- using working directory ${working_directory}"
+
+sg_date=`gdate --date="2 hours ago" '+%Y-%m-%dT%H:%M:%SZ'`
+# generate mementos from storygraph with hc
+
+if [ ! -e ${working_directory}/story-mementos.tsv ]; then
+    memento_selection_cmd="hc identify mementos -i storygraph -a 1;${sg_date} -o ${working_directory}/story-mementos.tsv -cs mongodb://localhost/csStoryGraph"
+    echo "`date` --- executing command::: ${memento_selection_cmd}"
+    $memento_selection_cmd
+else
+    echo "already discovered ${working_directory}/story-mementos.tsv so moving on to next command..."
+fi
+
+# generate image analysis for story image
+
+if [ ! -e ${working_directory}/imagedata.json ]; then
+    image_analysis_cmd="hc report image-data -i mementos -a ${working_directory}/story-mementos.tsv -cs mongodb://localhost/csStoryGraph -o ${working_directory}/imagedata.json"
+    echo "`date` --- executing command::: ${image_analysis_cmd}"
+    ${image_analysis_cmd}
+else
+    echo "already discovered ${working_directory}/imagedata.json so moving on to next command..."
+fi
+
+# generate story JSON for raintale with hc
+
+if [ ! -e ${working_directory}/raintale-story.json ]; then
+    story_create_cmd="hc synthesize raintale-story -i mementos -a ${working_directory}/story-mementos.tsv -o ${working_directory}/raintale-story.json -cs mongodb://localhost/csStoryGraph --imagedata ${working_directory}/imagedata.json --title \"StoryGraph's Biggest Story ${storydate}\""
+    echo "`date` --- executing command::: ${story_create_cmd}"
+    ${story_create_cmd}
+else
+    echo "already discovered ${working_directory}/raintale-story.json so moving on to next command..."
+fi
+
+# tellstory using story JSON, save to _posts
+
+# commit
+# push

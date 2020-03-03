@@ -1,6 +1,7 @@
 #!/bin/bash
 
 set -e
+set -x
 
 if [ -z $1 ]; then
     working_directory=`mktemp -d -t storygraph-stories-`
@@ -35,9 +36,8 @@ fi
 # generate story JSON for raintale with hc
 
 if [ ! -e ${working_directory}/raintale-story.json ]; then
-    story_create_cmd="hc synthesize raintale-story -i mementos -a ${working_directory}/story-mementos.tsv -o ${working_directory}/raintale-story.json -cs mongodb://localhost/csStoryGraph --imagedata ${working_directory}/imagedata.json --title \"StoryGraph's Biggest Story ${storydate}\""
-    echo "`date` --- executing command::: ${story_create_cmd}"
-    ${story_create_cmd}
+    echo "`date` --- executing command:::"
+    hc synthesize raintale-story -i mementos -a ${working_directory}/story-mementos.tsv -o ${working_directory}/raintale-story.json -cs mongodb://localhost/csStoryGraph --imagedata ${working_directory}/imagedata.json --title "StoryGraph Biggest Story ${sg_date}"
 else
     echo "already discovered ${working_directory}/raintale-story.json so moving on to next command..."
 fi

@@ -13,6 +13,7 @@ fi
 echo "`date` --- using working directory ${working_directory}"
 
 sg_date=`gdate --date="2 hours ago" '+%Y-%m-%dT%H:%M:%SZ'`
+hr_sg_date=`gdate --date="2 hours ago" '+%Y-%m-%d'`
 # generate mementos from storygraph with hc
 
 if [ ! -e ${working_directory}/story-mementos.tsv ]; then
@@ -37,12 +38,14 @@ fi
 
 if [ ! -e ${working_directory}/raintale-story.json ]; then
     echo "`date` --- executing command:::"
-    hc synthesize raintale-story -i mementos -a ${working_directory}/story-mementos.tsv -o ${working_directory}/raintale-story.json -cs mongodb://localhost/csStoryGraph --imagedata ${working_directory}/imagedata.json --title "StoryGraph Biggest Story ${sg_date}"
+    hc synthesize raintale-story -i mementos -a ${working_directory}/story-mementos.tsv -o ${working_directory}/raintale-story.json -cs mongodb://localhost/csStoryGraph --imagedata ${working_directory}/imagedata.json --title "StoryGraph Biggest Story ${hr_sg_date}"
 else
     echo "already discovered ${working_directory}/raintale-story.json so moving on to next command..."
 fi
 
 # tellstory using story JSON, save to _posts
+post_date=`date '+%Y-%m-%d'`
+tellstory -i ${working_directory}/raintale-story.json --storyteller template --story-template raintale-templates/storygraph-story.html -o _posts/${post_date}-storygraph-bigstory.html
 
 # commit
 # push

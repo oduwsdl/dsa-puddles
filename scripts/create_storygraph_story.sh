@@ -34,6 +34,14 @@ else
     echo "already discovered ${working_directory}/imagedata.json so moving on to next command..."
 fi
 
+# sort by publication date
+if [ ! -e ${working_directory}/sorted-story-mementos.tsv ]; then
+    echo "`date` --- executing command:::"
+    hc order pubdate-else-memento-datetime -i mementos -a ${working_directory}/story-mementos.tsv -o ${working_directory}/sorted-story-mementos.tsv -cs mongodb://localhost/csStoryGraph
+else
+    echo "already discovered ${working_directory}/sorted-story-mementos.tsv so moving on to next command..."
+fi
+
 # generate story JSON for raintale with hc
 
 if [ ! -e ${working_directory}/raintale-story.json ]; then

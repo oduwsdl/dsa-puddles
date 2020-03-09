@@ -3,17 +3,9 @@ layout: post
 title: "{{ title }}"
 img: {{ story_image }}
 date: {{ generation_date }}
-permalink: /stories/{{ generation_date.strftime('%Y%m%d%H%M%S') }}/{{ title|lower|replace(' ', '_')|replace('/', '-') }}/
+permalink: /stories/testing/{{ title|lower|replace(' ', '_')|replace('/', '-') }}/
 categories: [storygraph]
 ---
-
-<style>
-  .meta_text {
-    color: #ffffff;
-    background-color: rgba(210, 84, 105, 0.4);
-    text-shadow: 1px 1px 2px black, 0 0 1em rgba(210, 84, 105, 0.4), 0 0 0.2em rgba(210, 84, 105, 0.4);
-  }
-</style>
 
 <main class="post_content">
   <article class="post">
@@ -25,22 +17,139 @@ categories: [storygraph]
       </div>
       <div class="post_description">
         <h1 class="post_title">{{ title }}</h1>
-        <p class="post_meta meta_text">
-        A news brief made from {{ elements|length }} mementos from web archives<br><br>
-        {% if metadata is not none %}
-        Topics: {% for topic in metadata.topics %}{{ topic }}{% if not loop.last %}, {% endif %}{% endfor %}
-        {% endif %}
+        <p class="post_meta">
+        A story of {{ elements|length }} mementos<br>
+        Selected by <a href="http://storygraph.cs.odu.edu/graphs/polar-media-consensus-graph/" style="color: #ffffff;">StoryGraph</a> on {{ generation_date.strftime('%Y/%m/%d') }}<br>
       </p>
       </div>
     </header> <!-- End Header -->
 
-    <div class="entry_content">
+    <div class="entry_content" style="overflow: hidden;">
 
         {% for element in elements %}
-        <hr>
+        <!-- <hr> -->
         
         {% if element.type == 'link' %}
+
+        <blockquote 
+            style="
+            width: 600px; 
+            font-size: 12px;
+            border: 1px solid rgb(231, 231, 231);
+            background: center center no-repeat fixed rgb(255, 255, 255);
+            margin: auto;
+            padding: 0px;
+            min-height: 200px;
+            line-height: 19.6px;
+            display: table;
+            ">
+            <div>
+                <div>
+                    <img
+                        style="
+                        max-width: 120px; 
+                        max-height: 120x;
+                        width:120px;
+                        margin: 10px;
+                        "
+                        src="{{ element.surrogate.best_image_uri }}">
+                </div>
+                <div>
+                    <p>
+                        <a href="{{ element.surrogate.urim }}">{{ element.surrogate.title }}</a>
+                    </p>
+                    <p>
+                        {{ element.surrogate.snippet }}
+                    </p>
+                </div>
+            </div>
+            <div>
+                <div style="
+                    margin: 5px;
+                    display: block;
+                    ">
+                <img
+                src="{{ element.surrogate.original_favicon }}"
+                width="16"
+                style="
+                    background: center center no-repeat fixed rgb(255, 255, 255);
+                    margin: 0px;
+                    padding: 0px;
+                    font-size: 10px;
+                    border-width: 0px;
+                    border-style: none;
+                    line-height: 15px;
+                    border-image-repeat: initial;
+                    border-image-width: 0;
+                    font-family: &quot;Museo Sans&quot;, &quot;Helvetica Neue&quot;, sans-serif;
+                    font-stretch: initial;
+                    font-weight: 400;
+                    vertical-align: middle;">&nbsp;&nbsp;
+                <a
+                data-originalurl="{{ element.surrogate.original_uri }}"
+                data-versiondate="{{ element.surrogate.memento_datetime.strftime('%Y-%m-%dT%H:%M:%SZ') }}"
+                href="{{ element.surrogate.urim }}"
+                style="
+                    text-decoration: none;
+                    color: rgb(9, 116, 255);
+                    background: center center no-repeat fixed rgb(255, 255, 255);
+                    margin: 0px;
+                    padding: 0px;">{{ element.surrogate.original_domain }}&nbsp;&nbsp;@&nbsp;&nbsp;{{ element.surrogate.memento_datetime.strftime('%Y-%m-%dT%H:%M:%SZ') }}</a>&nbsp;&nbsp;
+                </div>
+                <div>||</div>
+                <div>
+                &nbsp;&nbsp;Preserved by 
+                <a
+                href="{{ element.surrogate.archive_uri }}"
+                style="
+                    text-decoration: none;
+                    color: rgb(9, 116, 255);
+                    background: center center no-repeat fixed rgb(255, 255, 255);
+                    margin: 0px;
+                    padding: 0px;
+                    display: block;
+                    ">{{ element.surrogate.archive_name }}</a>
+                <img 
+                src="{{ element.surrogate.archive_favicon }}"
+                alt="{{ element.surrogate.archive_name }}"
+                width="16"
+                style="
+                    background: center center no-repeat fixed rgb(255, 255, 255);
+                    margin: 0px;
+                    padding: 0px;
+                    display: block;
+                    font-size: 10px;
+                    border-width: 0px;
+                    border-style: none;
+                    line-height: 15px;
+                    border-image-repeat: initial;
+                    border-image-width: 0;
+                    vertical-align: middle;">
+                </div>
+            </div>
+            <div>
+                <a 
+                href="http://timetravel.mementoweb.org/list/{{ element.surrogate.memento_datetime.strftime('%Y%m%d%H%M%S') }}Z/{{ element.surrogate.original_uri }}"
+                style="
+                    text-decoration: none;
+                    color: rgb(9, 116, 255);
+                    background: center center no-repeat fixed rgb(255, 255, 255);
+                    margin: 0px;
+                    padding: 0px;">Other Versions</a>&nbsp; || 
+            <a 
+                data-versionurl="{{ element.surrogate.urim }}" 
+                data-versiondate="{{ element.surrogate.memento_datetime.strftime('%Y-%m-%dT%H:%M:%SZ') }}"
+                href="{{ element.surrogate.original_uri }}"
+                style="
+                    text-decoration: none;
+                    color: rgb(9, 116, 255);
+                    background: center center no-repeat fixed rgb(255, 255, 255);
+                    margin: 0px;
+                    padding: 0px;">Current version</a>
+            </div>
+        </blockquote>
         
+        <!--
         <blockquote 
             class="mementoembed"
             data-versionurl="{{ element.surrogate.urim }}"
@@ -58,12 +167,13 @@ categories: [storygraph]
             data-original-link-status="{{ element.surrogate.original_linkstatus }}"
             data-versiondate="{{ element.surrogate.memento_datetime.strftime('%Y-%m-%dT%H:%M:%SZ') }}"
             style="
-                width: 100%; 
+                width: 600px; 
                 font-size: 12px;
                 border: 1px solid rgb(231, 231, 231);
                 background: center center no-repeat fixed rgb(255, 255, 255);
                 margin: auto;
                 padding: 0px;
+                min-height: 200px;
                 line-height: 19.6px;
                 display: table;
                 "
@@ -75,13 +185,13 @@ categories: [storygraph]
                 float: left;
                 margin: 0px 30px 5px 0px;
                 padding: 1px;
-                max-height: 200px;
-                max-width: 200px;
-                width: 200px;
+                max-height: 120px;
+                max-width: 120px;
+                width: 120px;
                 background: center center no-repeat fixed rgb(255, 255, 255);"
                 >
                 <img
-                    style="max-width: 200px; max-height: 200px;"
+                    style="max-width: 120px; max-height: 120x;"
                     src="{{ element.surrogate.best_image_uri }}">
             </div>
             <div class="me-textright">
@@ -110,30 +220,6 @@ categories: [storygraph]
                                 padding: 0px;
                                 ">{{ element.surrogate.title }}</a>
                 </p>
-                <!-- <div 
-                    class="me-belowtitle"
-                    style="
-                        color: rgb(153, 153, 153);
-                        font-family: &quot;Museo Sans&quot;, &quot;Helvetica Neue&quot;, sans-serif;
-                        font-size: 10px;
-                        text-align: left;
-                        margin: 0px;
-                        padding: 0px;
-                        background: center center no-repeat fixed rgb(255, 255, 255);">
-
-                        {% if element.surrogate.archive_collection_name is not none %}
-                        <br>
-                        Member of the Collection 
-                        <a class="me-archive-link" style="
-                            text-decoration: none;
-                            color: rgb(9, 116, 255);
-                            background: center center no-repeat fixed rgb(255, 255, 255);
-                            margin: 0px;
-                            padding: 0px;"
-                            href="{{ element.surrogate.archive_collection_uri }}">{{ element.surrogate.archive_collection_name }}</a>
-                        {% endif %}
-                </div> -->
-                <br>
                 <p 
                 class="me-snippet"
                 style="
@@ -155,7 +241,6 @@ categories: [storygraph]
                     margin: 10px 0px 0px;
                     padding: 10px 0px 0px;
                     background: center center no-repeat fixed rgb(255, 255, 255);">&nbsp;&nbsp;
-                    <div style="float: left;">
                     <img
                         class="me-favicon"
                         src="{{ element.surrogate.original_favicon }}"
@@ -184,40 +269,39 @@ categories: [storygraph]
                             color: rgb(9, 116, 255);
                             background: center center no-repeat fixed rgb(255, 255, 255);
                             margin: 0px;
-                            padding: 0px;">{{ element.surrogate.original_domain }}&nbsp;&nbsp;@&nbsp;&nbsp;{{ element.surrogate.memento_datetime.strftime('%Y-%m-%dT%H:%M:%SZ') }}</a>
-                    </div>
-                    <div style="float: right; margin-right: 10px;">
-                    Preserved by <a
-                    class="me-archive-link"
-                    href="{{ element.surrogate.archive_uri }}"
-                    style="
-                        text-decoration: none;
-                        color: rgb(9, 116, 255);
-                        background: center center no-repeat fixed rgb(255, 255, 255);
-                        margin: 0px;
-                        padding: 0px;">{{ element.surrogate.archive_name }}</a>
-                    <img 
-                    class="me-favicon"
-                    src="{{ element.surrogate.archive_favicon }}"
-                    alt="{{ element.surrogate.archive_name }}"
-                    width="16"
-                    style="
-                        background: center center no-repeat fixed rgb(255, 255, 255);
-                        margin: 0px;
-                        padding: 0px;
-                        font-size: 10px;
-                        border-width: 0px;
-                        border-style: none;
-                        line-height: 15px;
-                        border-image-repeat: initial;
-                        border-image-width: 0;
-                        font-family: &quot;Museo Sans&quot;, &quot;Helvetica Neue&quot;, sans-serif;
-                        font-stretch: initial;
-                        font-weight: 400;
-                        vertical-align: middle;">
-                    </div>
-            </div>
-            <div>
+                            padding: 0px;">{{ element.surrogate.original_domain }}&nbsp;&nbsp;@&nbsp;&nbsp;{{ element.surrogate.memento_datetime.strftime('%Y-%m-%dT%H:%M:%SZ') }}</a>&nbsp;&nbsp;
+
+                    ||
+
+                    &nbsp;&nbsp;Preserved by <a
+                        class="me-archive-link"
+                        href="{{ element.surrogate.archive_uri }}"
+                        style="
+                            text-decoration: none;
+                            color: rgb(9, 116, 255);
+                            background: center center no-repeat fixed rgb(255, 255, 255);
+                            margin: 0px;
+                            padding: 0px;">{{ element.surrogate.archive_name }}</a>
+                        <img 
+                        class="me-favicon"
+                        src="{{ element.surrogate.archive_favicon }}"
+                        alt="{{ element.surrogate.archive_name }}"
+                        width="16"
+                        style="
+                            background: center center no-repeat fixed rgb(255, 255, 255);
+                            margin: 0px;
+                            padding: 0px;
+                            font-size: 10px;
+                            border-width: 0px;
+                            border-style: none;
+                            line-height: 15px;
+                            border-image-repeat: initial;
+                            border-image-width: 0;
+                            font-family: &quot;Museo Sans&quot;, &quot;Helvetica Neue&quot;, sans-serif;
+                            font-stretch: initial;
+                            font-weight: 400;
+                            vertical-align: middle;">
+                            <br> &nbsp; 
                     <a 
                         class="me-allversions"
                         href="http://timetravel.mementoweb.org/list/{{ element.surrogate.memento_datetime.strftime('%Y%m%d%H%M%S') }}Z/{{ element.surrogate.original_uri }}"
@@ -240,6 +324,8 @@ categories: [storygraph]
                             padding: 0px;">Current version</a>
             </div>
         </blockquote>
+
+        -->
         
         {% else %}
         
@@ -250,24 +336,7 @@ categories: [storygraph]
         {% endfor %}
 
     </div>
-  
-  <section>
-    <hr>
-    <p style="margin-left: 10px;">
-      How this story was constructed:
-      </p>
-      <ol>
-        <li>Hypercane performed the following steps:</li>
-        <ol>
-          <li>It sampled the resources from <a href="http://storygraph.cs.odu.edu/graphs/polar-media-consensus-graph/">StoryGraph</a></li>
-          <li>For resources that were not already mementos, it submitted them to web archives with <a href="https://github.com/oduwsdl/archivenow">ArchiveNow</a></li>
-          <li>It analyzed all images in these mementos to automatically select the best image for the story</li>
-          <li>It then formatted the data for the story based on all of this input</li>
-        </ol>
-        <li><a href="https://oduwsdl.github.io/raintale/">Raintale</a> took the input from Hypercane and rendered the final product with information supplied by  <a href="https://mementoembed.readthedocs.io/en/latest/">MementoEmbed</a></li>
-      </ol>
-      <hr>
-  </section>
+    
 
   <section class="author cf">
     <div class="post_wrapper">

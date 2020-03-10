@@ -24,14 +24,29 @@ else
     echo "already discovered ${working_directory}/story-mementos.tsv so moving on to next command..."
 fi
 
-# generate image analysis for story image
-
+# perform image analysis for story image
 if [ ! -e ${working_directory}/imagedata.json ]; then
     image_analysis_cmd="hc report image-data -i mementos -a ${working_directory}/story-mementos.tsv -cs mongodb://localhost/csStoryGraph -o ${working_directory}/imagedata.json"
     echo "`date` --- executing command::: ${image_analysis_cmd}"
     ${image_analysis_cmd}
 else
     echo "already discovered ${working_directory}/imagedata.json so moving on to next command..."
+fi
+
+# perform sumgram analysis
+if [ ! -e ${working_directory}/sumgram_data.tsv ]; then
+    echo "`date` --- executing command"
+    hc report terms -i mementos -a ${working_directory}/story-mementos.tsv -cs mongodb://localhost/csStoryGraph -o ${working_directory}/sumgram_data.tsv --sumgrams
+else
+    echo "already discovered ${working_directory}/sumgram_data.tsv so moving on to next command..."
+fi
+
+# perform entity analysis
+if [ ! -e ${working_directory}/entity_data.tsv ]; then
+    echo "`date` --- executing command"
+    hc report entities -i mementos -a ${working_directory}/story-mementos.tsv -cs mongodb://localhost/csStoryGraph -o ${working_directory}/entity_data.tsv
+else
+    echo "already discovered ${working_directory}/entity_data.tsv so moving on to next command..."
 fi
 
 # sort by publication date
@@ -43,10 +58,9 @@ else
 fi
 
 # generate story JSON for raintale with hc
-
 if [ ! -e ${working_directory}/raintale-story.json ]; then
     echo "`date` --- executing command:::"
-    hc synthesize raintale-story -i mementos -a ${working_directory}/story-mementos.tsv -o ${working_directory}/raintale-story.json -cs mongodb://localhost/csStoryGraph --imagedata ${working_directory}/imagedata.json --title "StoryGraph Biggest Story ${hr_sg_date}"
+    hc synthesize raintale-story -i mementos -a ${working_directory}/story-mementos.tsv -o ${working_directory}/raintale-story.json -cs mongodb://localhost/csStoryGraph --imagedata ${working_directory}/imagedata.json --title "StoryGraph Biggest Story ${hr_sg_date}" --termdata ${working_directory}/sumgram_data.tsv --entitydata ${working_directory}/entity_data.tsv
 else
     echo "already discovered ${working_directory}/raintale-story.json so moving on to next command..."
 fi

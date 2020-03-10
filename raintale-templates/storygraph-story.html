@@ -28,7 +28,8 @@ categories: [storygraph]
         <p class="post_meta meta_text">
         A news brief made from {{ elements|length }} mementos from web archives<br><br>
         {% if metadata is not none %}
-        Topics: {% for topic in metadata.topics %}{{ topic }}{% if not loop.last %}, {% endif %}{% endfor %}
+        <strong class="meta_text">Sumgrams:</strong> <span class="meta_text">{% for term in metadata.terms %}{{ term }}{% if not loop.last %}, {% endif %}{% endfor %}</span><br><br>
+        <strong class="meta_text">Entities:</strong> <span class="meta_text">{% for entity in metadata.entities %}{{ entity }}{% if not loop.last %}, {% endif %}{% endfor %}</span>
         {% endif %}
       </p>
       </div>

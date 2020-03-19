@@ -10,16 +10,40 @@ else
     mkdir -p ${working_directory}
 fi
 
-echo "`date` --- using working directory ${working_directory}"
+if [ -z $2 ]; then
+    sg_month=`date '+%m'`
+    sg_date=`date '+%d'`
+    sg_year=`date '+%Y'`
+else
+    sg_date=`echo $2 | awk -F- '{ print $3 }'`
+    sg_month=`echo $2 | awk -F- '{ print $2 }'`
+    sg_year=`echo $2 | awk -F- '{ print $1 }'`
+fi
 
-sg_date=`gdate --date="2 hours ago" '+%Y-%m-%dT%H:%M:%SZ'`
-hr_sg_date=`gdate --date="2 hours ago" '+%Y-%m-%d'`
-# generate mementos from storygraph with hc
+echo "`date` --- using working directory ${working_directory}"
+echo "`date` --- using year: ${sg_year} ; month: ${sg_month}; date: ${sg_date}"
+
+
+hr_sg_date="${sg_year}-${sg_month}-${sg_date}"
+echo hr_sg_date=$hr_sg_date
+# generate mementos from storygraph with sgtk
 
 if [ ! -e ${working_directory}/story-mementos.tsv ]; then
-    memento_selection_cmd="hc identify mementos -i storygraph -a 1;${sg_date} -o ${working_directory}/story-mementos.tsv -cs mongodb://localhost/csStoryGraph"
-    echo "`date` --- executing command::: ${memento_selection_cmd}"
-    $memento_selection_cmd
+
+    sg_file="${working_directory}/sgtk-maxgraph-${sg_year}${sg_month}${sg_date}.json"
+
+    echo "creating StoryGraph file ${sg_file}"
+
+    sgtk --pretty-print -o ${sg_file} maxgraph \
+        --start-mm-dd ${sg_month}-${sg_date} --end-mm-dd ${sg_month}-${sg_date} \
+        --daily-maxgraph-count 1 --year ${sg_year}
+    sg_url=`grep '"graph_uri":' ${sg_file} | sed 's/^[ ]*"graph_uri": "//g' | sed 's/"[,]*$//g'`
+
+    echo "URI-Rs" > ${working_directory}/story-original-resources.tsv
+    grep '"link":' ${sg_file} | sed 's/^[ ]*"link": "//g' | sed 's/"$//g' >> ${working_directory}/story-original-resources.tsv
+
+    hc identify mementos -i original-resources -a ${working_directory}/story-original-resources.tsv -cs mongodb://localhost/csStoryGraph -o ${working_directory}/story-mementos.tsv
+
 else
     echo "already discovered ${working_directory}/story-mementos.tsv so moving on to next command..."
 fi
@@ -65,9 +89,19 @@ else
     echo "already discovered ${working_directory}/raintale-story.json so moving on to next command..."
 fi
 
-# tellstory using story JSON, save to _posts
 post_date=`date '+%Y-%m-%d'`
-tellstory -i ${working_directory}/raintale-story.json --storyteller template --story-template raintale-templates/storygraph-story.html -o _posts/${post_date}-storygraph-bigstory.html
+# tellstory using story JSON, save to _posts
+if [ ! -e _posts/${post_date}-storygraph-bigstory.html ]; then
+    echo "`date` --- executing command:::"
+    tellstory -i ${working_directory}/raintale-story.json --storyteller template --story-template raintale-templates/storygraph-story.html -o _posts/${post_date}-storygraph-bigstory.html
+else
+    echo "already created story at _posts/${post_date}-storygraph-bigstory.html"
+fi
 
 # commit
+git pull
+git add _posts/${post_date}-storygraph-bigstory.html
+git commit -m "adding storygraph story for ${post_date}"
+
 # push
+git push

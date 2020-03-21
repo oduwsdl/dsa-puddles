@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "{{ title }}"
+title: "{{ title }} -- {% for term in metadata.terms %}{{ term }}{% if not loop.last %}, {% endif %}{% endfor %}"
 img: {{ story_image }}
 date: {{ generation_date }}
-permalink: /stories/{{ generation_date.strftime('%Y%m%d%H%M%S') }}/{{ title|lower|replace(' ', '_')|replace('/', '-') }}/
+permalink: /stories/shari/{{ generation_date.strftime('%Y') }}/{{ generation_date.strftime('%m') }}/{{ generation_date.strftime('%d') }}/{{ title|lower|replace(' ', '_')|replace('/', '-') }}/
 categories: [storygraph]
 ---
 
@@ -24,13 +24,23 @@ categories: [storygraph]
         {% endif %}
       </div>
       <div class="post_description">
-        <h1 class="post_title">{{ title }}</h1>
+        <h1 class="post_title">{{ title }} -- {% for term in metadata.terms %}{{ term }}{% if not loop.last %}, {% endif %}{% endfor %}</h1>
         <p class="post_meta meta_text">
-        A news brief made from {{ elements|length }} mementos from web archives<br><br>
+        A news brief made from {{ elements|length }}/85 recently archived news articles<br><br>
         {% if metadata is not none %}
-        <strong class="meta_text">Sumgrams:</strong> <span class="meta_text">{% for term in metadata.terms %}{{ term }}{% if not loop.last %}, {% endif %}{% endfor %}</span><br><br>
-        <strong class="meta_text">Entities:</strong> <span class="meta_text">{% for entity in metadata.entities %}{{ entity }}{% if not loop.last %}, {% endif %}{% endfor %}</span>
+        <!-- <strong class="meta_text">Sumgrams:</strong> <span class="meta_text">{% for term in metadata.terms %}{{ term }}{% if not loop.last %}, {% endif %}{% endfor %}</span><br><br> -->
+        <strong class="meta_text">Entities:</strong> <span class="meta_text">{% for entity in metadata.entities %}{{ entity }}{% if not loop.last %}, {% endif %}{% endfor %}</span><br><br>
         {% endif %}
+        <a href="{{ collection_url }}" class="meta_text">View the StoryGraph of this Story</a><br><br>
+        {% raw %}        
+        {% if page.previous.url %}
+            <a href="{{ site.baseurl}}{{ page.previous.url }}" class="meta_text" style="float: left;">&laquo; Previous Story</a>
+        {% endif %}
+
+        {% if page.next.url %}
+            <a href="{{ site.baseurl}}{{ page.next.url }}" class="meta_text" style="float: right;">&laquo; Next Story</a>
+        {% endif %}
+        {% endraw %}
       </p>
       </div>
     </header> <!-- End Header -->

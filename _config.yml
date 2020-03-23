@@ -41,8 +41,8 @@ logo:
 # analytics:
 
 # Paginate
-paginate: 12
-paginate_path: /page:num/
+paginate: 9
+paginate_path: "/page:num/"
 
 # Build settings
 markdown: kramdown

@@ -1,10 +1,7 @@
 ---
 layout: post
-title: DSA Puddles -- {{ title }} -- {% for term in metadata.terms %}{{ term }}{% if not loop.last %}, {% endif %}{% endfor %}
-shorttitle: {{ title }}
-description: {% for term in metadata.terms %}{{ term }}{% if not loop.last %}, {% endif %}{% endfor %} -- {% for entity in metadata.entities %}{{ entity }}{% if not loop.last %}, {% endif %}{% endfor %}
+title: "{{ title }} -- {% for term in metadata.terms %}{{ term }}{% if not loop.last %}, {% endif %}{% endfor %}"
 img: {{ story_image }}
-imgalt: Striking image for {{ title }}
 date: {{ generation_date }}
 permalink: /stories/shari/{{ generation_date.strftime('%Y') }}/{{ generation_date.strftime('%m') }}/{{ generation_date.strftime('%d') }}/{{ title|lower|replace(' ', '_')|replace('/', '-') }}/
 categories: [storygraph]
@@ -27,21 +24,21 @@ categories: [storygraph]
         {% endif %}
       </div>
       <div class="post_description">
-        <h1 class="post_title">{{ title }} -- {% for term in metadata.terms %}{{ term }}{% if not loop.last %}, {% endif %}{% endfor %}</h1>
+        <h1 class="post_title">{{ title }}</h1>
         <p class="post_meta meta_text">
-        A news brief made from {{ elements|length }}/85 recently archived news articles<br><br>
+        A story generated from the mementos chosen by the curator of an Archive-It collection<br><br>
         {% if metadata is not none %}
-        <!-- <strong class="meta_text">Sumgrams:</strong> <span class="meta_text">{% for term in metadata.terms %}{{ term }}{% if not loop.last %}, {% endif %}{% endfor %}</span><br><br> -->
+        <strong class="meta_text">Sumgrams:</strong> <span class="meta_text">{% for term in metadata.terms %}{{ term }}{% if not loop.last %}, {% endif %}{% endfor %}</span><br><br>
         <strong class="meta_text">Entities:</strong> <span class="meta_text">{% for entity in metadata.entities %}{{ entity }}{% if not loop.last %}, {% endif %}{% endfor %}</span><br><br>
         {% endif %}
-        <a href="{{ collection_url }}" class="meta_text">View the StoryGraph of this Story</a><br><br>
-        {% raw %}        
+        <a href="{{ collection_url }}" class="meta_text">View this Archive-It Collection</a><br><br>
+        {% raw %}
         {% if page.previous.url %}
             <a href="{{ site.baseurl}}{{ page.previous.url }}" class="meta_text" style="float: left;">&laquo; Previous Story</a>
         {% endif %}
 
         {% if page.next.url %}
-            <a href="{{ site.baseurl}}{{ page.next.url }}" class="meta_text" style="float: right;">Next Story &laquo;</a>
+            <a href="{{ site.baseurl}}{{ page.next.url }}" class="meta_text" style="float: right;">&laquo; Next Story</a>
         {% endif %}
         {% endraw %}
       </p>
@@ -271,10 +268,10 @@ categories: [storygraph]
       How this story was constructed:
       </p>
       <ol>
+        <li><a href="https://twitter.com/yasmina_anwar">Yasmin AlNoamany</a> requested that a collection curator select the best mementos from their own collection.</li>
         <li>Hypercane performed the following steps:</li>
         <ol>
-          <li>It sampled the resources from <a href="http://storygraph.cs.odu.edu/graphs/polar-media-consensus-graph/">StoryGraph</a></li>
-          <li>For resources that were not already mementos, it submitted them to web archives with <a href="https://github.com/oduwsdl/archivenow">ArchiveNow</a></li>
+          <li>It gathered data from Archive-It's interface using <a href="https://github.com/oduwsdl/archiveit_utilities">Archive-It Utilities</a></li>
           <li>It analyzed all mementos to automatically discover the most frequent <a href="https://github.com/oduwsdl/sumgram">sumgrams</a> and named entities present in the overall story</li>
           <li>It analyzed all images in these mementos to automatically select the best image for the overall story</li>
           <li>It then formatted the data for the story based on all of this input</li>
@@ -282,6 +279,16 @@ categories: [storygraph]
         <li><a href="https://oduwsdl.github.io/raintale/">Raintale</a> took the input from Hypercane and rendered the final product with information supplied by  <a href="https://mementoembed.readthedocs.io/en/latest/">MementoEmbed</a></li>
       </ol>
       <hr>
+      Other information about this story:
+      <ul>
+        <li>The <a href="https://doi.org/10.6084/m9.figshare.5701054">dataset</a> containing the mementos used in this and other human stories is available on Figshare.</li>
+        <li>This URLs from this story were featured in:</li>
+        <ul>
+          <li>Yasmin AlNoamany, Michele C. Weigle, Michael L. Nelson. 2017. <a href="https://arxiv.org/abs/1705.06218">Stories From the Past Web</a>. arXiv Tech Report 1705.06218.</li>
+          <li>Yasmin AlNoamany, Michele C. Weigle, Michael L. Nelson. 2017. <a href="https://doi.org/10.1145/3091478.3091508">Generating Stories From Archived Collections</a>. Proceedings of the 2017 ACM on Web Science Conference.</li>
+          <li>Yasmin AlNoamany. 2016. <a href="https://digitalcommons.odu.edu/computerscience_etds/13/">Using Web Archives to Enrich the Live Web Experience Through Storytelling</a>. PhD Dissertation. Old Dominion University.</li>
+          <li>Shawn M. Jones, Michele C. Weigle, Michael L. Nelson. 2019. <a href="https://doi.org/10.1145/3357384.3358039">Social Cards <em>Probably</em> Provide For Better Understanding Of Web Archive Collections</a>. Proceedings of the 28th ACM International Conference on Information and Knowledge Management.</li>
+        </ul>
   </section>
 
   <section class="author cf">

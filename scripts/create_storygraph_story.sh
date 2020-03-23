@@ -23,10 +23,6 @@ fi
 echo "`date` --- using working directory ${working_directory}"
 echo "`date` --- using year: ${sg_year} ; month: ${sg_month}; date: ${sg_date}"
 
-
-hr_sg_date="${sg_year}-${sg_month}-${sg_date}"
-echo hr_sg_date=$hr_sg_date
-
 # 1. query StoryGraph service for rank r story of the day
 if [ ! -e ${working_directory}/story-original-resources.tsv ]; then
 
@@ -34,20 +30,15 @@ if [ ! -e ${working_directory}/story-original-resources.tsv ]; then
 
     echo "creating StoryGraph file ${sg_file}"
 
-    # sgtk --pretty-print -o ${sg_file} maxgraph \
-    #     --start-mm-dd ${sg_month}-${sg_date} --end-mm-dd ${sg_month}-${sg_date} \
-    #     --daily-maxgraph-count 1 --year ${sg_year}
-    sgtk --pretty-print -o ${working_directory}/graphs_links.txt maxgraph \
+    sgtk -o ${working_directory}/graphs_links.txt maxgraph \
         --daily-maxgraph-count=0 -y ${sg_year} --start-mm-dd=${sg_month}-${sg_date} --end-mm-dd=${sg_month}-${sg_date} \
         --cluster-stories --format=maxstory_links --maxstory-count=1 > ${working_directory}/sg-output.txt 2>&1
     sg_base_uri=`cat ${working_directory}/sg-output.txt | grep "service uri:" | awk '{ print $3 }'`
     sg_fragment=`cat ${working_directory}/sg-output.txt | grep "maxgraph cursor:" | awk '{ print $3 }'`
     echo "${sg_base_uri}${sg_fragment}" > ${working_directory}/sg.url.txt
-    # grep '"graph_uri":' ${sg_file} | sed 's/^[ ]*"graph_uri": "//g' | sed 's/"[,]*$//g' > ${working_directory}/sg.url.txt
 
     echo "URI-Rs" > ${working_directory}/story-original-resources.tsv
     cat ${working_directory}/graphs_links.txt >> ${working_directory}/story-original-resources.tsv
-    # grep '"link":' ${sg_file} | sed 's/^[ ]*"link": "//g' | sed 's/"$//g' >> ${working_directory}/story-original-resources.tsv
 
 else
     echo "already discovered ${working_directory}/story-original-resources.tsv so moving on to next command..."
@@ -103,6 +94,7 @@ fi
 post_date=`date '+%Y-%m-%d'`
 # 8. Generate Jekyll HTML file for the day's rank r story
 if [ ! -e _posts/${post_date}-storygraph-bigstory.html ]; then
+    hr_sg_date="${sg_year}-${sg_month}-${sg_date}"
     echo "`date` --- executing command:::"
     sg_url=`cat ${working_directory}/sg.url.txt`
     tellstory -i ${working_directory}/raintale-story.json --storyteller template --story-template raintale-templates/storygraph-story.html -o _posts/${post_date}-storygraph-bigstory.html --collection-url ${sg_url}

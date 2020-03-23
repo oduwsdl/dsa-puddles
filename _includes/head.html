@@ -4,7 +4,29 @@
 	<meta name="description" content="{{ page.description }}">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-	<meta property="og:image" content="">
+
+	<meta name="description" content='{{ page.description }}'>
+	<meta name="author" content="Dark and Stormy Archives Project">
+	<meta name="image" content="{{ page.img }}">
+
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:site" content="@StormyArchives">
+	<meta name="twitter:creator" content="@shawnmjones">
+	<meta name="twitter:title" content="{{ page.shorttitle }}">
+	<meta name="twitter:description" content="{{ page.description }}">
+	<meta name="twitter:image" content="{{ page.img }}">
+	<meta name="twitter:image:alt" content="{{ page.imgalt }}">
+
+	<meta property="og:title" content="{{ page.shorttitle }}">
+	<meta property="og:image" content="{{ page.img }}">
+	<meta property="og:image:url" content="{{ page.img }}">
+	<meta property="og:description" content='{{ page.description }}'>
+	<meta property="og:locale" content="en_US">
+	<meta property="og:site_name" content="DSA Puddles - Visualizations of the Dark and Stormy Archives Project">
+	<meta property="og:image:alt" content="{{ page.img.alt }}">
+	<meta property="og:url" content="{{ page.url | absolute_url }}">
+	<meta property="og:type" content="website" />
+
 	<link rel="shortcut icon" href="{{ "/assets/img/favicon/favicon.ico" | prepend: site.baseurl }}" type="image/x-icon">
 	<link rel="apple-touch-icon" href="{{ "/assets/img/favicon/apple-touch-icon.png" | prepend: site.baseurl }}">
 	<link rel="apple-touch-icon" sizes="72x72" href="{{ "/assets/img/favicon/apple-touch-icon-72x72.png" | prepend: site.baseurl }}">

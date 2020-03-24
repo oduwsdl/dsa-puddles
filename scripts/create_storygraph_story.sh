@@ -102,8 +102,18 @@ else
     echo "already created story at _posts/${post_date}-storygraph-bigstory.html"
 fi
 
+if [ ! -e assets/striking_images/${post_date}.png ]; then
+    striking_image_url=`grep "^img:" _posts/${post_date}-storygraph-bigstory.html | awk '{ print $2 }'`
+    wget -O ${working_directory}/${post_date}-striking-image.dat ${striking_image_url}
+    convert ${working_directory}/${post_date}-striking-image.dat ${working_directory}/${post_date}-striking-image-origsize.png
+    convert ${working_directory}/${post_date}-striking-image-origsize.png -resize 368.391x245.531 assets/img/striking_images/${post_date}.png
+    sed -i '' -e "s|^img: .*$|img: /dsa-puddles/assets/img/striking_images/${post_date}.png|g" _posts/${post_date}-storygraph-bigstory.html
+else
+    echo "already generated smaller striking image for assets/striking_images/${post_date}.png"
+fi
+
 # 9. Publish to GitHub Pages
-git pull
-git add _posts/${post_date}-storygraph-bigstory.html
-git commit -m "adding storygraph story for ${post_date}"
-git push
+# git pull
+# git add _posts/${post_date}-storygraph-bigstory.html
+# git commit -m "adding storygraph story for ${post_date}"
+# git push

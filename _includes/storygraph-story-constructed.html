@@ -1,0 +1,19 @@
+<section>
+    <hr>
+    <p style="margin-left: 10px;">
+      How this story was constructed:
+      </p>
+      <ol>
+        <li>The StoryGraph Toolkit extracted URIs from the biggest story of the day from the <a href="http://storygraph.cs.odu.edu/graphs/polar-media-consensus-graph/">StoryGraph</a> service</li>
+        <li>Hypercane performed the following steps:</li>
+        <ol>
+          <li>It accepted the list of original resource URIs from the output of the StoryGraph Toolkit, and queried the <a href="http://timetravel.mementoweb.org/">Memento Aggregator</a> to find as many mementos as possible</li>
+          <li>For resources that were not already mementos, it submitted them to web archives with <a href="https://github.com/oduwsdl/archivenow">ArchiveNow</a></li>
+          <li>It analyzed all mementos to automatically discover the most frequent <a href="https://github.com/oduwsdl/sumgram">sumgrams</a> and named entities present in the overall story</li>
+          <li>It analyzed all images in these mementos to automatically select the best image for the overall story</li>
+          <li>It then formatted the data for the story based on all of this input</li>
+        </ol>
+        <li><a href="https://oduwsdl.github.io/raintale/">Raintale</a> took the input from Hypercane and rendered the final product with information supplied by  <a href="https://mementoembed.readthedocs.io/en/latest/">MementoEmbed</a></li>
+      </ol>
+      <hr>
+  </section>

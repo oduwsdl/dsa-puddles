@@ -27,21 +27,24 @@ categories: [storygraph]
         {% endif %}
       </div>
       <div class="post_description">
-        <h1 class="post_title">{{ title }} -- {% for term in metadata.terms %}{{ term }}{% if not loop.last %}, {% endif %}{% endfor %}</h1>
-        <p class="post_meta meta_text">
-        A news brief made from {{ elements|length }}/85 recently archived news articles<br><br>
+        <h1 class="post_title meta_text">{{ title }} -- {% for term in metadata.terms %}{{ term }}{% if not loop.last %}, {% endif %}{% endfor %}</h1>
+        <p class="post_meta meta_text" style="width: 100%;">
+        <p class="post_meta meta_text" style="width: 100%;">
+        A news brief made from {{ elements|length }}/85 recently archived news articles
+        </p>
+        <br><br>
         {% if metadata is not none %}
         <!-- <strong class="meta_text">Sumgrams:</strong> <span class="meta_text">{% for term in metadata.terms %}{{ term }}{% if not loop.last %}, {% endif %}{% endfor %}</span><br><br> -->
         <strong class="meta_text">Entities:</strong> <span class="meta_text">{% for entity in metadata.entities %}{{ entity }}{% if not loop.last %}, {% endif %}{% endfor %}</span><br><br>
         {% endif %}
         <a href="{{ collection_url }}" class="meta_text">View the StoryGraph of this Story</a><br><br>
-        {% raw %}        
+        {% raw %}
         {% if page.previous.url %}
             <a href="{{ site.baseurl}}{{ page.previous.url }}" class="meta_text" style="float: left;">&laquo; Previous Story</a>
         {% endif %}
 
         {% if page.next.url %}
-            <a href="{{ site.baseurl}}{{ page.next.url }}" class="meta_text" style="float: right;">Next Story &laquo;</a>
+            <a href="{{ site.baseurl}}{{ page.next.url }}" class="meta_text" style="float: right;">Next Story &raquo;</a>
         {% endif %}
         {% endraw %}
       </p>
@@ -265,35 +268,13 @@ categories: [storygraph]
 
     </div>
   
-  <section>
-    <hr>
-    <p style="margin-left: 10px;">
-      How this story was constructed:
-      </p>
-      <ol>
-        <li>Hypercane performed the following steps:</li>
-        <ol>
-          <li>It sampled the resources from <a href="http://storygraph.cs.odu.edu/graphs/polar-media-consensus-graph/">StoryGraph</a></li>
-          <li>For resources that were not already mementos, it submitted them to web archives with <a href="https://github.com/oduwsdl/archivenow">ArchiveNow</a></li>
-          <li>It analyzed all mementos to automatically discover the most frequent <a href="https://github.com/oduwsdl/sumgram">sumgrams</a> and named entities present in the overall story</li>
-          <li>It analyzed all images in these mementos to automatically select the best image for the overall story</li>
-          <li>It then formatted the data for the story based on all of this input</li>
-        </ol>
-        <li><a href="https://oduwsdl.github.io/raintale/">Raintale</a> took the input from Hypercane and rendered the final product with information supplied by  <a href="https://mementoembed.readthedocs.io/en/latest/">MementoEmbed</a></li>
-      </ol>
-      <hr>
-  </section>
+  {% raw %}
+    {% include storygraph-story-constructed.html %}
+  {% endraw %}
 
-  <section class="author cf">
-    <div class="post_wrapper">
-      <div class="author_image">
-        <img src="https://oduwsdl.github.io/dsa-puddles/assets/img/dsa-logo-monochrome-wb.png" alt="Author face">
-      </div>
-      <div class="author_info">
-        <h2 class="author_title">Dark and Stormy Archives - Puddles</h2>
-        <p class="author_subtitle">Visit the <a href="https://oduwsdl.github.io/dsa/">Dark and Stormy Archives (DSA) project web site</a> for information on research, software, and more that supports storytelling with web archives.</p>
-      </div>
-    </div>
-  </section> <!-- End Section Author -->
+  {% raw %}
+    {% include dsa-more-information-footer.html %}
+  {% endraw %}
+
   
 </main> <!-- End Section Post Content -->

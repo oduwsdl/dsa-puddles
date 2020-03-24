@@ -22,6 +22,7 @@ fi
 
 echo "`date` --- using working directory ${working_directory}"
 echo "`date` --- using year: ${sg_year} ; month: ${sg_month}; date: ${sg_date}"
+post_date="${sg_year}-${sg_month}-${sg_date}"
 
 # 1. query StoryGraph service for rank r story of the day
 if [ ! -e ${working_directory}/story-original-resources.tsv ]; then
@@ -91,7 +92,6 @@ else
     echo "already discovered ${working_directory}/raintale-story.json so moving on to next command..."
 fi
 
-post_date="${sg_year}-${sg_month}-${sg_date}"
 # 8. Generate Jekyll HTML file for the day's rank r story
 if [ ! -e _posts/${post_date}-storygraph-bigstory.html ]; then
     hr_sg_date="${sg_year}-${sg_month}-${sg_date}"

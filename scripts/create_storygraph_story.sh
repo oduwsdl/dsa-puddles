@@ -4,20 +4,20 @@ set -e
 set -x
 
 if [ -z $1 ]; then
-    working_directory=`mktemp -d -t storygraph-stories-`
-else
-    working_directory=$1
-    mkdir -p ${working_directory}
-fi
-
-if [ -z $2 ]; then
     sg_month=`date '+%m'`
     sg_date=`date '+%d'`
     sg_year=`date '+%Y'`
 else
-    sg_date=`echo $2 | awk -F- '{ print $3 }'`
-    sg_month=`echo $2 | awk -F- '{ print $2 }'`
-    sg_year=`echo $2 | awk -F- '{ print $1 }'`
+    sg_date=`echo $1 | awk -F- '{ print $3 }'`
+    sg_month=`echo $1 | awk -F- '{ print $2 }'`
+    sg_year=`echo $1 | awk -F- '{ print $1 }'`
+fi
+
+if [ -z $2 ]; then
+    working_directory=`mktemp -d -t storygraph-stories-`
+else
+    working_directory=$2
+    mkdir -p ${working_directory}
 fi
 
 echo "`date` --- using working directory ${working_directory}"
@@ -102,14 +102,14 @@ else
     echo "already created story at _posts/${post_date}-storygraph-bigstory.html"
 fi
 
-if [ ! -e assets/striking_images/${post_date}.png ]; then
+if [ ! -e assets/img/striking_images/${post_date}.png ]; then
     striking_image_url=`grep "^img:" _posts/${post_date}-storygraph-bigstory.html | awk '{ print $2 }'`
     wget -O ${working_directory}/${post_date}-striking-image.dat ${striking_image_url}
     convert ${working_directory}/${post_date}-striking-image.dat ${working_directory}/${post_date}-striking-image-origsize.png
     convert ${working_directory}/${post_date}-striking-image-origsize.png -resize 368.391x245.531 assets/img/striking_images/${post_date}.png
     sed -i '' -e "s|^img: .*$|img: /dsa-puddles/assets/img/striking_images/${post_date}.png|g" _posts/${post_date}-storygraph-bigstory.html
 else
-    echo "already generated smaller striking image for assets/striking_images/${post_date}.png"
+    echo "already generated smaller striking image for assets/img/striking_images/${post_date}.png"
 fi
 
 # 9. Publish to GitHub Pages

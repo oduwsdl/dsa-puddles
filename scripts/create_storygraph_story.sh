@@ -91,7 +91,7 @@ else
     echo "already discovered ${working_directory}/raintale-story.json so moving on to next command..."
 fi
 
-post_date=`date '+%Y-%m-%d'`
+post_date="${sg_year}-${sg_month}-${sg_date}"
 # 8. Generate Jekyll HTML file for the day's rank r story
 if [ ! -e _posts/${post_date}-storygraph-bigstory.html ]; then
     hr_sg_date="${sg_year}-${sg_month}-${sg_date}"
@@ -113,7 +113,7 @@ else
 fi
 
 # 9. Publish to GitHub Pages
-# git pull
-# git add _posts/${post_date}-storygraph-bigstory.html
-# git commit -m "adding storygraph story for ${post_date}"
-# git push
+git pull
+git add _posts/${post_date}-storygraph-bigstory.html
+git commit -m "adding storygraph story for ${post_date}"
+git push

@@ -7,10 +7,16 @@ if [ -z $1 ]; then
     sg_month=`date '+%m'`
     sg_date=`date '+%d'`
     sg_year=`date '+%Y'`
+    sg_hour=`date '+%H'`
+    sg_minute=`date '+%m'`
+    sg_second=`date '+%S'`
 else
     sg_date=`echo $1 | awk -F- '{ print $3 }'`
     sg_month=`echo $1 | awk -F- '{ print $2 }'`
     sg_year=`echo $1 | awk -F- '{ print $1 }'`
+    sg_hour=`date '+%H'`
+    sg_minute=`date '+%m'`
+    sg_second=`date '+%S'`
 fi
 
 post_date="${sg_year}-${sg_month}-${sg_date}"
@@ -106,7 +112,7 @@ fi
 if [ ! -e ${jekyll_story_file} ]; then
     echo "`date` --- executing command:::"
     sg_url=`cat ${working_directory}/sg.url.txt`
-    tellstory -i ${story_data_file} --storyteller template --story-template raintale-templates/storygraph-story.html -o ${jekyll_story_file} --collection-url ${sg_url}
+    tellstory -i ${story_data_file} --storyteller template --story-template raintale-templates/storygraph-story.html -o ${jekyll_story_file} --collection-url ${sg_url} --generation-date ${post_date}T${sg_hour}:${sg_minute}:${sg_second}
 else
     echo "already created story at ${jekyll_story_file}"
 fi
@@ -123,8 +129,8 @@ else
 fi
 
 # 9. Publish to GitHub Pages
-git pull
-git add ${jekyll_story_file}
-git add ${small_striking_image}
-git commit -m "adding storygraph story for ${post_date}"
-git push
+# git pull
+# git add ${jekyll_story_file}
+# git add ${small_striking_image}
+# git commit -m "adding storygraph story for ${post_date}"
+# git push

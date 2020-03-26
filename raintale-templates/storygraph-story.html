@@ -8,7 +8,7 @@ imgalt: Striking image for {{ title }}
 date: {{ generation_date }}
 permalink: /stories/shari/{{ generation_date.strftime('%Y') }}/{{ generation_date.strftime('%m') }}/{{ generation_date.strftime('%d') }}/{{ title|lower|replace(' ', '_')|replace('/', '-') }}/
 categories: [storygraph]
-storygraph_url:
+storygraph_url: {{ collection_url }}
 entities: {% for entity in metadata.entities %}{{ entity }}{% if not loop.last %}, {% endif %}{% endfor %}
 article_count: {{ elements|length }}
 article_total: 85

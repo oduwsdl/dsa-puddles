@@ -28,6 +28,12 @@ else
     mkdir -p ${working_directory}
 fi
 
+if [ -z $3 ]; then
+    mementoembed_endpoint="http://localhost:5550"
+else
+    mementoembed_endpoint=$3
+fi
+
 echo "`date` --- using working directory ${working_directory}"
 echo "`date` --- using year: ${sg_year} ; month: ${sg_month}; date: ${sg_date}"
 
@@ -112,7 +118,7 @@ fi
 if [ ! -e ${jekyll_story_file} ]; then
     echo "`date` --- executing command:::"
     sg_url=`cat ${working_directory}/sg.url.txt`
-    tellstory -i ${story_data_file} --storyteller template --story-template raintale-templates/storygraph-story.html -o ${jekyll_story_file} --collection-url ${sg_url} --generation-date ${post_date}T${sg_hour}:${sg_minute}:${sg_second}
+    tellstory -i ${story_data_file} --storyteller template --story-template raintale-templates/storygraph-story.html -o ${jekyll_story_file} --collection-url ${sg_url} --generation-date ${post_date}T${sg_hour}:${sg_minute}:${sg_second} --mementoembed_api ${mementoembed_endpoint}
 else
     echo "already created story at ${jekyll_story_file}"
 fi
@@ -120,9 +126,25 @@ fi
 # extra - swap the striking image with a smaller thumbnail so that the main page will load faster
 if [ ! -e ${small_striking_image} ]; then
     striking_image_url=`grep "^img:" ${jekyll_story_file} | awk '{ print $2 }'`
-    wget -O ${working_directory}/${post_date}-striking-image.dat ${striking_image_url}
-    convert ${working_directory}/${post_date}-striking-image.dat ${working_directory}/${post_date}-striking-image-origsize.png
-    convert ${working_directory}/${post_date}-striking-image-origsize.png -resize 368.391x245.531 ${small_striking_image}
+
+    if [ ! -e ${working_directory}/${post_date}-striking-image.dat ]; then
+        wget -O ${working_directory}/${post_date}-striking-image.dat ${striking_image_url}
+    else
+        echo "already downloaded image from ${striking_image_url}"
+    fi
+
+    if [ ! -e ${working_directory}/${post_date}-striking-image-origsize.png ]; then
+        convert ${working_directory}/${post_date}-striking-image.dat ${working_directory}/${post_date}-striking-image-origsize.png
+    else
+        echo "already converted image to PNG"
+    fi
+
+    if [ ! -e ${small_striking_image} ]; then
+        convert ${working_directory}/${post_date}-striking-image-origsize.png -resize 368.391x245.531 ${small_striking_image}
+    else
+        echo "already resized image"
+    fi
+
     sed -i '' -e "s|^img: .*$|img: /dsa-puddles/${small_striking_image}|g" ${jekyll_story_file}
 else
     echo "already generated smaller striking image for ${small_striking_image}"

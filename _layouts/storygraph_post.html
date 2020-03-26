@@ -1,0 +1,119 @@
+---
+layout: default
+---
+{% include header.html %}
+
+<style>
+    .meta_text {
+        color: #ffffff;
+        /* background-color: rgba(210, 84, 105, 0.4); */
+        /* text-shadow: 1px 1px 2px black, 0 0 1em rgba(210, 84, 105, 0.4), 0 0 0.2em rgba(210, 84, 105, 0.4); */
+        text-shadow: 15px 15px 100px black, 0 0 1em black, 0 0 0.2em black;
+        background-color: transparent !important;
+    }
+    a.storynav:hover {
+        text-decoration: underline;
+    }
+    a.storynav {
+        color: #ffffff;
+        text-decoration: none;
+    }
+</style>
+
+<main class="post_content">
+    <article class="post">
+        <header>
+            <div class="post_image">
+                <img src="{{ page.img }}" alt="{{ page.imgalt }}">
+            </div>
+            <div class="post_description">
+                <h1 class="post_title meta_text">{{ page.title }}</h1>
+                <div class="meta_text" style="background-color: rgba(0, 0, 0, 0.6) !important; padding: 32px; color: #ffffff;">
+                    A news brief made from {{ page.article_count }}/{{ page.article_total }} recently archived news articles
+                    <hr>
+                    <table border="0" width="100%">
+                        <tr><td width="30%" style="text-align: left;">
+                    {% if page.previous.url %}
+                        <a href="{{ site.baseurl}}{{ page.previous.url }}" class="storynav">&laquo; Previous Story</a>
+                    {% else %}
+                        &laquo; Previous Story
+                    {% endif %}
+                    </td><td width="40%" style="text-align: center;">
+                    <a href="{{ page.storygraph_url }}" class="storynav">View the StoryGraph of this Story</a>
+                    </td><td width="30%" style="text-align: right;">
+                    {% if page.next.url %}
+                        <a href="{{ site.baseurl}}{{ page.next.url }}" class="storynav">Next Story &raquo;</a>
+                    {% else %}
+                        Next Story &raquo;
+                    {% endif %}
+                    </td>
+                    </tr>
+                    </table>
+    
+                    <hr>
+                    <table border="0">
+                        <tr>
+                            <td style="border-right-color: #ffffff; border-right-style: solid; border-right-width: 1px; border-bottom-color: #ffffff; border-bottom-style: solid; border-bottom-width: 1px; padding-bottom: 10px;"><strong>Most frequent entities</strong></td>
+                            <td style="border-bottom-color: #ffffff; border-bottom-style: solid; border-bottom-width: 1px; padding-left: 10px;">{{ page.entities }}</td>
+                        </tr>
+                        <tr>
+                            <td style="border-right-color: #ffffff; border-right-style: solid; border-right-width: 1px;padding-top: 10px;"><strong>Most frequent sumgrams</strong></td>
+                            <td style="padding-left: 10px;">{{ page.terms }}</td>
+                        </tr>
+                    </table>
+    
+                    <hr>
+    
+                </div>
+            </div>
+
+        </header> <!-- End Header -->
+
+        <!-- <div class="entry_content" >
+
+        </div> -->
+  
+        <div class="entry_content">
+
+
+
+{{ page.content }}
+
+
+<hr>
+
+<div style="background-color: #262626; padding: 32px; color: #ffffff;">
+    <hr>
+    <table border="0" width="100%">
+        <tr><td width="30%" style="text-align: left;">
+    {% if page.previous.url %}
+        <a href="{{ site.baseurl}}{{ page.previous.url }}"  class="storynav">&laquo; Previous Story</a>
+    {% else %}
+        &laquo; Previous Story
+    {% endif %}
+    </td><td width="40%" style="text-align: center;">
+    <a href="{{ page.storygraph_url }}"  class="storynav">View the StoryGraph of this Story</a>
+    </td><td width="30%" style="text-align: right;">
+    {% if page.next.url %}
+        <a href="{{ site.baseurl}}{{ page.next.url }}"  class="storynav">Next Story &raquo;</a>
+    {% else %}
+        Next Story &raquo;
+    {% endif %}
+    </td>
+    </tr>
+    </table>
+    <hr>
+</div>
+
+{% include storygraph-story-constructed.html %}
+  
+
+  
+{% include dsa-more-information-footer.html %}
+
+        </div>
+    </article>
+</main> <!-- End Section Post Content -->
+
+
+{% include footer.html %}

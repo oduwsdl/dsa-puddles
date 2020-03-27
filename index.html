@@ -15,10 +15,10 @@ imgalt: Dark version of the Dark and Stormy Archives Logo
 </style>
 
 {% for post in paginator.posts %}
-  <div class="chapter" style="border-width: 1px; border-color: black; border-style: solid;">
+  <div class="chapter" style="border-width: 1px; border-color: white; border-style: solid; vertical-align: center;">
     <a href="{{post.url | prepend: site.baseurl}}">
       {% if post.img %}
-      <img src="{{post.img}}" alt="{{post.title}}">
+      <img src="{{post.img}}" alt="{{post.title}}" style="vertical-align: center;">
       {% endif %}
     
     <div class="chapter_inner" style="background-color: rgb(0, 0, 0, 0.5);">

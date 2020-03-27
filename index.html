@@ -15,7 +15,7 @@ imgalt: Dark version of the Dark and Stormy Archives Logo
 </style>
 
 {% for post in paginator.posts %}
-  <div class="chapter">
+  <div class="chapter" style="border-width: 1px; border-color: black; border-style: solid;">
     <a href="{{post.url | prepend: site.baseurl}}">
       {% if post.img %}
       <img src="{{post.img}}" alt="{{post.title}}">

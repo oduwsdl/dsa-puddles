@@ -31,7 +31,7 @@ layout: default
                 <div class="meta_text" style="background-color: rgba(0, 0, 0, 0.6) !important; padding: 32px; color: #ffffff;">
                     A news brief made from {{ page.article_count }}/{{ page.article_total }} recently archived news articles
                     <hr>
-                    <table border="0" width="100%">
+                    <table border="0" width="100%" style="background-color: black">
                         <tr><td width="30%" style="text-align: left;">
                     {% if page.previous.url %}
                         <a href="{{ site.baseurl}}{{ page.previous.url }}" class="storynav">&laquo; Previous Story</a>
@@ -51,10 +51,18 @@ layout: default
                     </table>
     
                     <hr>
-                    <table border="0">
+                    <table border="0" style="background-color: black">
                         <tr>
                             <td style="border-right-color: #ffffff; border-right-style: solid; border-right-width: 1px; border-bottom-color: #ffffff; border-bottom-style: solid; border-bottom-width: 1px; padding-bottom: 10px;"><strong>Most frequent entities</strong></td>
-                            <td style="border-bottom-color: #ffffff; border-bottom-style: solid; border-bottom-width: 1px; padding-left: 10px;">{{ page.entities }}</td>
+                            <td style="border-bottom-color: #ffffff; border-bottom-style: solid; border-bottom-width: 1px; padding-left: 10px;">
+                                {% assign entities = page.entities | split: ', ' %}
+                                {% for entity in entities %}
+                                    <a class="storynav" href="https://en.wikipedia.org/wiki/{{ entity }}">{{ entity }}</a>
+                                    {% if forloop.index != forloop.length %}
+                                        ,
+                                    {% endif %}
+                                {% endfor %}
+                            </td>
                         </tr>
                         <tr>
                             <td style="border-right-color: #ffffff; border-right-style: solid; border-right-width: 1px;padding-top: 10px;"><strong>Most frequent sumgrams</strong></td>

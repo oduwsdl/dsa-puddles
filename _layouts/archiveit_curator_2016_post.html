@@ -1,0 +1,80 @@
+---
+layout: default
+---
+{% include header.html %}
+
+<style>
+    .storify_subtitle {
+        color: rgb(135, 149, 171);
+        display: inline;
+        font-family: "Museo Sans", "Helvetica Neue", sans-serif;
+        font-size: 12px;
+        -webkit-font-smoothing: antialiased
+    }
+
+</style>
+
+<main class="post_content">
+    <article class="post">
+        <header>
+            <!-- <div class="post_image">
+                <img src="{{ page.img }}" alt="{{ page.imgalt }}">
+            </div> -->
+            <div class="post_description">
+                <h1 class="post_title">{{ page.title }}</h1>
+                <span class="storify_subtitle">by</span>
+                <span class="storify_subtitle" 
+                style='margin-left: 4px;'> 
+                <img src="{{ site.baseurl }}/assets/img/storify-default-avatar.png"> ait_stories
+                </span>
+                <span class="storify_subtitle"
+                style="margin-left: 14px;">3 years ago</span>
+                <span class="storify_subtitle"
+                style="margin-left: 14px;">10 Views</span>
+            </div>
+            <hr>
+
+        </header> <!-- End Header -->
+  
+        <div class="entry_content">
+
+
+
+{{ page.content }}
+
+
+<hr>
+
+<div style="background-color: #262626; padding: 32px; color: #ffffff;">
+    <hr>
+    <table border="0" width="100%">
+        <tr><td width="30%" style="text-align: left;">
+    {% if page.previous.url %}
+        <a href="{{ site.baseurl}}{{ page.previous.url }}"  class="storynav">&laquo; Previous Story</a>
+    {% else %}
+        &laquo; Previous Story
+    {% endif %}
+    </td><td width="40%" style="text-align: center;">
+    &nbsp;
+    </td><td width="30%" style="text-align: right;">
+    {% if page.next.url %}
+        <a href="{{ site.baseurl}}{{ page.next.url }}"  class="storynav">Next Story &raquo;</a>
+    {% else %}
+        Next Story &raquo;
+    {% endif %}
+    </td>
+    </tr>
+    </table>
+    <hr>
+</div>
+
+{% include archiveit-curator-2016-story-constructed.html %}
+  
+{% include dsa-more-information-footer.html %}
+
+        </div>
+    </article>
+</main> <!-- End Section Post Content -->
+
+
+{% include footer.html %}

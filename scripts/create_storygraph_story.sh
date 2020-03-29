@@ -150,7 +150,7 @@ else
     echo "already generated smaller striking image for ${small_striking_image}"
 fi
 
-9. Publish to GitHub Pages
+# 9. Publish to GitHub Pages
 git pull
 git add ${jekyll_story_file}
 git add ${small_striking_image}

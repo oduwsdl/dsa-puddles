@@ -93,3 +93,9 @@ if [ ! -e ${jekyll_story_file} ]; then
     sed -i '' -e "s/{{ collection_id }}/${collection_id}/g" ${jekyll_story_file}
 
 fi
+
+# 4. Publish to GitHub Pages
+git pull
+git add ${jekyll_story_file}
+git commit -m "adding Archive-It story from ${bfilename}"
+git push

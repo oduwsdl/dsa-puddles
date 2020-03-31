@@ -14,20 +14,7 @@ imgalt: Dark version of the Dark and Stormy Archives Logo
 
 {% for post in paginator.posts %}
 
-	{% assign remainder = forloop.index0 | modulo:3 %}
-
-	{% if forloop.first != true %}
-
-		{% if remainder == 0 %}
-
-		</div>
-		<div class="row">
-
-		{% endif %}
-
-	{% endif %}
-
-	<div class="col-md-4">
+	<div class="col">
 		<div class="chapter">
 		  <a href="{{post.url | prepend: site.baseurl}}"  style="vertical-align: center;">
 		    {% if post.img %}

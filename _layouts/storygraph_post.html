@@ -12,33 +12,86 @@ layout: default
             </div>
             <div class="post_description">
                 <h1 class="post_title meta_text">{{ page.title }}</h1>
-                <div class="meta_text" style="background-color: rgba(0, 0, 0, 0.6) !important; padding: 32px; color: #ffffff;">
+                <div class="meta_text" style="
+                        background-color: rgba(0, 0, 0, 0.6) !important;
+                        padding: 32px;
+                        color: #ffffff;font-size:
+                        12px;
+                        margin: 0;
+                        padding: 0;
+                    ">
+                    <div class="row">
+                    <div class="col" style="
+                        text-align: center; 
+                        border-bottom-width: 1px;
+                        border-bottom-color: #ffffff;
+                        border-bottom-style: dotted;
+                        border-top-width: 1px;
+                        border-top-color: #ffffff;
+                        border-top-style: dotted;
+                        margin-top: 10px;
+                        font-size: 14pt;
+                        ">
                     A news brief made from {{ page.article_count }}/{{ page.article_total }} recently archived news articles
-                    <hr>
-                    <table border="0" width="100%" style="background-color: black">
-                        <tr><td width="30%" style="text-align: left;">
+                    </div>
+                    </div>
+                    <div class="row" style="
+                        text-align: center; 
+                        border-bottom-width: 1px;
+                        border-bottom-color: #ffffff;
+                        border-bottom-style: dotted;
+                        font-size: 12pt;
+                    ">
+                    <div class="col" style="
+                        text-align: left;
+                        padding-left: 5%;
+                    ">
                     {% if page.previous.url %}
                         <a href="{{ site.baseurl}}{{ page.previous.url }}" class="storynav">&laquo; Previous Story</a>
                     {% else %}
                         &laquo; Previous Story
                     {% endif %}
-                    </td><td width="40%" style="text-align: center;">
+                    </div>
+                    
+                    <div class="col" style="
+                        text-align: center;
+                    ">
                     <a href="{{ page.storygraph_url }}" class="storynav">View the StoryGraph of this Story</a>
-                    </td><td width="30%" style="text-align: right;">
+                    </div>
+                    <div class="col" style="
+                        text-align: right;
+                        padding-right: 5%;
+                    ">
                     {% if page.next.url %}
                         <a href="{{ site.baseurl}}{{ page.next.url }}" class="storynav">Next Story &raquo;</a>
                     {% else %}
                         Next Story &raquo;
                     {% endif %}
-                    </td>
-                    </tr>
-                    </table>
-    
-                    <hr>
-                    <table border="0" style="background-color: black">
-                        <tr>
-                            <td style="border-right-color: #ffffff; border-right-style: solid; border-right-width: 1px; border-bottom-color: #ffffff; border-bottom-style: solid; border-bottom-width: 1px; padding-bottom: 10px;"><strong>Most frequent entities</strong></td>
-                            <td style="border-bottom-color: #ffffff; border-bottom-style: solid; border-bottom-width: 1px; padding-left: 10px;">
+                    </div>
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col" style="
+                            padding: 1%;
+                            padding-left: 5%;
+                            border-bottom-style: dotted;
+                            border-bottom-color: #ffffff;
+                            border-bottom-width: 1px;
+                        ">
+                            <strong>Most frequent entities</strong>
+                        </div>
+
+                        <div class="col" style="
+                            padding: 1%;
+                            padding-right: 5%;
+                            border-bottom-style: solid;
+                            border-bottom-color: #ffffff;
+                            border-bottom-width: 1px;
+                            border-left-style: dotted;
+                            border-left-color: #ffffff;
+                            border-left-width: 1px;
+                        ">
                                 {% assign entities = page.entities | split: ', ' %}
                                 {% for entity in entities %}
                                     <a class="storynav" href="https://en.wikipedia.org/wiki/{{ entity }}">{{ entity }}</a>
@@ -46,16 +99,27 @@ layout: default
                                         ,
                                     {% endif %}
                                 {% endfor %}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="border-right-color: #ffffff; border-right-style: solid; border-right-width: 1px;padding-top: 10px;"><strong>Most frequent sumgrams</strong></td>
-                            <td style="padding-left: 10px;">{{ page.terms }}</td>
-                        </tr>
-                    </table>
-    
-                    <hr>
-    
+                        </div>
+                    </div>
+                    <div class="row">
+
+                        <div class="col" style="
+                            padding: 1%;
+                            padding-left: 5%;
+                        ">
+                            <strong>Most frequent sumgrams</strong></td>
+                        </div>
+                        <div class="col" style="
+                            padding: 1%; 
+                            padding-right: 5%;
+                            border-left-style: dotted;
+                            border-left-color: #ffffff;
+                            border-left-width: 1px;
+                        ">
+                            {{ page.terms }}
+                        </div>
+
+                    </div>
                 </div>
             </div>
 

@@ -2,6 +2,7 @@
 <html lang="en">
 {% include head.html %}
 <style>
+
 html body {
     background-color: rgba(30, 30, 30);
 
@@ -94,7 +95,8 @@ a.chapter:hover {
 .post header {
   position: relative;
   overflow: hidden;
-  margin-bottom: 3rem;
+  padding: 0;
+  margin: 0;
 }
 
 .post header img {
@@ -107,6 +109,8 @@ a.chapter:hover {
   position: absolute;
   left: 0;
   bottom: 0;
+  margin: 0;
+  padding: 0;
 }
 
 .post_content {
@@ -124,71 +128,31 @@ a.chapter:hover {
 
 .post header .post_meta {
   display: inline-block;
-  padding: 0.5rem 1rem;
-  font-size: 1.1rem;
   margin: 0;
   color: #ffffff;
   background-color: rgba(210, 84, 105, 0.4);
 }
 
 .post header .post_title {
-  padding: 1rem;
   font-size: 2rem;
   margin: 0;
   background-color: rgba(192, 51, 74, 0.4);
   color: #ffffff;
+  padding-left: 2%;
+  padding-right: 2%;
 }
 
-.post .entry_content {
-  padding-bottom: 2rem;
-}
-
-.post_footer {
-  padding: 2rem 0;
-  background-color: #ffffff;
-  border-top: 2px solid #6e6e6e;
-}
-
-.post_footer span {
-  text-transform: uppercase;
-  font-size: 0.8rem;
-  color: #525c65;
-}
-
-.post_footer a {
-  text-decoration: none;
-  margin-left: 0.1rem;
-  margin-bottom: 0.3rem;
-  padding: 0.5rem 1rem;
-  color: #6e6e6e;
-  background-color: #e6e6e6;
-  display: inline-block;
-  -webkit-transition: all .35s ease-in-out;
-  transition: all .35s ease-in-out;
-}
-
-.post_footer a:hover {
-  background-color: #d25469;
-  color: #ffffff;
-}
-
-.post_footer .post_share {
-  float: left;
-}
-
-.post_footer .post_share a {
-  font-size: 0.9rem;
-}
-
-.post_footer .post_tag {
-  float: right;
-}
-
-.post_footer .post_tag a {
-  font-size: 0.7rem;
-  text-transform: uppercase;
-  line-height: 1rem;
-  display: inline-block;
+@media only screen 
+  and (min-width: 768px)
+  and (max-width: 1024px) {
+  .post header .post_title {
+    font-size: 14pt;
+    margin: 0;
+    padding-left: 2%;
+    padding-right: 2%;
+    background-color: rgba(192, 51, 74, 0.4);
+    color: #ffffff;
+  }
 }
 
 .author {
@@ -254,6 +218,20 @@ hr {
 	height: 0.5px;
 	background-color:black;
 	border-top-width: 0.5px;
+}
+
+.paging {
+  color: #ffffff;
+  font-size: 24px;
+      padding: 10px;
+}
+
+a.paging:hover {
+  color: #6e6e6e;
+}
+
+.active {
+    border-bottom: 5px solid #6e6e6e;
 }
 
 </style>

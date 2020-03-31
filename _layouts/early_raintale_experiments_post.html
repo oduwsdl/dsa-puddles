@@ -1,0 +1,103 @@
+---
+layout: default
+---
+{% include header.html %}
+
+<main class="post_content">
+    <article class="post">
+        <header>
+            <div style="
+            padding: 2%;
+            font-size: 14px;
+            ">
+                <p style='
+                font-family: "Museo Sans","Helvetica Neue",sans-serif;
+                background-color: white;
+                color: rgb(42, 49, 60);
+                text-align: center;
+                '>This story was presented in the <a href="https://ws-dl.blogspot.com/2019/07/2019-07-11-raintale-storytelling-tool.html">original Raintale blog post</a>.</p>
+            </div>
+            <div style="background-color: #262626; padding: 32px; color: #ffffff;">
+                <table border="0" width="100%">
+                    <tr><td width="30%" style="text-align: left;">
+                {% if page.previous.url %}
+                    <a href="{{ site.baseurl}}{{ page.previous.url }}"  class="storynav">&laquo; Previous Story</a>
+                {% else %}
+                    &laquo; Previous Story
+                {% endif %}
+                </td><td width="40%" style="text-align: center;">
+                &nbsp;
+                </td><td width="30%" style="text-align: right;">
+                {% if page.next.url %}
+                    <a href="{{ site.baseurl}}{{ page.next.url }}"  class="storynav">Next Story &raquo;</a>
+                {% else %}
+                    Next Story &raquo;
+                {% endif %}
+                </td>
+                </tr>
+                </table>
+            </div>
+
+        </header> <!-- End Header -->
+  
+        <div class="row">
+        <div class="col ml-5 mr-5 mt-3 text-center mx-5 px-5">
+
+
+
+{{ page.content }}
+
+</div>
+</div>
+
+<div class="row">
+<div class="col">
+
+
+<div style="background-color: #262626; padding: 32px; color: #ffffff;">
+    <table border="0" width="100%">
+        <tr><td width="30%" style="text-align: left;">
+    {% if page.previous.url %}
+        <a href="{{ site.baseurl}}{{ page.previous.url }}"  class="storynav">&laquo; Previous Story</a>
+    {% else %}
+        &laquo; Previous Story
+    {% endif %}
+    </td><td width="40%" style="text-align: center;">
+    &nbsp;
+    </td><td width="30%" style="text-align: right;">
+    {% if page.next.url %}
+        <a href="{{ site.baseurl}}{{ page.next.url }}"  class="storynav">Next Story &raquo;</a>
+    {% else %}
+        Next Story &raquo;
+    {% endif %}
+    </td>
+    </tr>
+    </table>
+</div>
+
+</div>
+</div>
+
+<div class="row">
+<div class="col ml-5 mr-5 mt-5 border-top">
+
+
+{% include archiveit-curator-2016-story-constructed.html %}
+
+</div>
+</div>
+
+  
+<div class="row">
+<div class="col ml-5 mr-5 border-top">
+
+  
+{% include dsa-more-information-footer.html %}
+
+        </div>
+        </div>
+    </article>
+</main> <!-- End Section Post Content -->
+
+
+{% include footer.html %}

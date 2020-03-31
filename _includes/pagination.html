@@ -1,39 +1,59 @@
+<style>
+	.paging {
+		color: #ffffff;
+		font-size: 24px;
+        padding: 10px;
+	}
 
-<nav class="pagination">
+	a.paging:hover {
+		color: #6e6e6e;
+	}
+
+	.active {
+  		border-bottom: 5px solid #6e6e6e;
+	}
+</style>
+
+<div class="row text-center mb-5">
+<div class="col">
+
   {% if paginator.previous_page %}
 
     {% if paginator.page != 1 %}
-    <h2 class="chapter_number"><a>Page {{ paginator.page }}</a></h2>
+    <p class="paging"><a>Page {{ paginator.page }}</a></p>
     {% endif %}
 
     {% if paginator.previous_page == 1 %}
-      <a href="{{ site.baseurl }}/">Prev</a>
+      <a href="{{ site.baseurl }}/" class="paging">Prev</a>
     {% else %}
-      <a href="{{ site.baseurl }}/page{{ paginator.previous_page }}/">Prev</a>
+      <a href="{{ site.baseurl }}/page{{ paginator.previous_page }}/" class="paging">Prev</a>
     {% endif %}
 
   {% else %}
-    <span class="disabled">Prev</span>
+<!--    <span class="disabled">Prev</span> -->
   {% endif %}
 
   {% if paginator.page == 1 %}
-    <span class="active">1</span>
+    <span class="active paging">1</span>
   {% else %}
-    <a href="{{ site.baseurl }}/">1</a>
+    <a href="{{ site.baseurl }}/" class="paging">1</a>
   {% endif %}
 
   {% for count in (2..paginator.total_pages) %}
 
     {% if count == paginator.page %}
-      <span class="active">{{ count }}</span>
+      <span class="active paging">{{ count }}</span>
     {% else %}
-      <a href="{{ site.baseurl }}/page{{ count }}/">{{ count }}</a>
+      <a href="{{ site.baseurl }}/page{{ count }}/" class="paging">{{ count }}</a>
     {% endif %}
   {% endfor %}
 
   {% if paginator.next_page %}
-    <a href="{{ site.baseurl }}/page{{ paginator.next_page }}/">Next</a>
+    <a href="{{ site.baseurl }}/page{{ paginator.next_page }}/" class="paging">Next</a>
   {% else %}
-    <span class="disabled">Next</span>
+<!--    <span class="disabled">Next</span> -->
   {% endif %}
-</nav> <!-- End Section Pagination -->
+
+</div>
+</div>
+<!-- </nav> --> <!-- End Section Pagination -->

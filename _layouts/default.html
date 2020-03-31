@@ -1,10 +1,267 @@
 <!DOCTYPE html>
 <html lang="en">
 {% include head.html %}
-<body>
+<style>
+html body {
+    background-color: rgba(30, 30, 30);
 
+}
+
+.chapter {
+	border-width: 1px;
+	border-color: white;
+	border-style: solid;
+	height: 600px;
+	margin-bottom: 25px;
+	color: #ffffff;
+	width: 350px;
+	height: 293px;
+}
+
+a.chapter:hover {
+	border-color: blue;
+}
+
+.chapter img {
+	max-width: 100%;
+	height: auto;
+	display: block;
+	margin: auto;
+	vertical-align: middle;
+}
+
+.chapter_number {
+	border-top: 3px solid #c25b6c;
+	border-bottom: 3px solid #c25b6c;
+	padding: 10px;
+	color: #ffffff;
+	text-transform: uppercase;
+	width: 350px;
+}
+
+.chapter_title {
+	padding: 10px;
+	color: #ffffff;
+	width: 350px;
+}
+
+.chapter_inner {
+	position: absolute;
+	text-size-adjust: 100%;
+	top: 70px;
+}
+
+.wrapper {
+  width: 1440px;
+  max-width: 90%;
+  margin: 0 auto;
+}
+
+.main_footer {
+  border-top-width: 1px;
+  border-top-style: solid;
+  border-top-color: #ffffff;
+  margin-bottom: 50px;
+}
+
+.copyright {
+  padding: 1rem 0;
+  text-align: center;
+}
+
+.copyright p {
+  color: #ffffff;
+  font-size: 0.7rem;
+  margin: 0;
+}
+
+.copyright a {
+  text-decoration: none;
+  color: #c0334a;
+  -webkit-transition: all .35s ease-in-out;
+  transition: all .35s ease-in-out;
+}
+
+.copyright a:hover {
+  color: rgba(192, 51, 74, 0.75);
+}
+
+.post {
+  background-color: #ffffff;
+  margin-bottom: 1.5rem;
+}
+
+.post header {
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 3rem;
+}
+
+.post header img {
+  width: 100%;
+  max-height: 500px;
+  vertical-align: middle;
+}
+
+.post header .post_description {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+}
+
+.post_content {
+  width: 960px;
+  max-width: 90%;
+  margin: 7rem auto 7rem;
+}
+
+.post_description {
+	box-sizing: border-box;
+	display: block;
+	position: absolute;
+	width: 100%;
+}
+
+.post header .post_meta {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  font-size: 1.1rem;
+  margin: 0;
+  color: #ffffff;
+  background-color: rgba(210, 84, 105, 0.4);
+}
+
+.post header .post_title {
+  padding: 1rem;
+  font-size: 2rem;
+  margin: 0;
+  background-color: rgba(192, 51, 74, 0.4);
+  color: #ffffff;
+}
+
+.post .entry_content {
+  padding-bottom: 2rem;
+}
+
+.post_footer {
+  padding: 2rem 0;
+  background-color: #ffffff;
+  border-top: 2px solid #6e6e6e;
+}
+
+.post_footer span {
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  color: #525c65;
+}
+
+.post_footer a {
+  text-decoration: none;
+  margin-left: 0.1rem;
+  margin-bottom: 0.3rem;
+  padding: 0.5rem 1rem;
+  color: #6e6e6e;
+  background-color: #e6e6e6;
+  display: inline-block;
+  -webkit-transition: all .35s ease-in-out;
+  transition: all .35s ease-in-out;
+}
+
+.post_footer a:hover {
+  background-color: #d25469;
+  color: #ffffff;
+}
+
+.post_footer .post_share {
+  float: left;
+}
+
+.post_footer .post_share a {
+  font-size: 0.9rem;
+}
+
+.post_footer .post_tag {
+  float: right;
+}
+
+.post_footer .post_tag a {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  line-height: 1rem;
+  display: inline-block;
+}
+
+.author {
+  padding: 2rem 0;
+  margin-bottom: 1.5rem;
+  background-color: #ffffff;
+}
+
+.author .author_image {
+  float: left;
+  display: inline-block;
+  /* -webkit-border-radius: 50%;
+          border-radius: 50%; */
+  width: 100px;
+  height: 100px;
+  overflow: hidden;
+  margin-right: 2rem;
+}
+
+.author .author_image img {
+  width: 100%;
+}
+
+.author .author_info {
+  padding-left: 8rem;
+}
+
+.author .author_info .author_title {
+  font-size: 1.5rem;
+  margin-top: 0;
+  color: #262626;
+}
+
+.author .author_info .author_title::before, .author .author_info .author_title::after {
+  content: " — ";
+}
+
+.author .author_social span {
+  display: inline-block;
+  color: #667085;
+  padding-right: 0.5rem;
+  margin: 0 0.5rem 0.5rem 0;
+  border-right: 1px solid #667085;
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+}
+
+.author .author_social span:last-child {
+  border-right: none;
+}
+
+.author .author_social span a {
+  color: #667085;
+  text-decoration: none;
+}
+
+.author .author_social span a:hover {
+  opacity: .9;
+}
+
+hr {
+	width: 100%;
+	height: 0.5px;
+	background-color:black;
+	border-top-width: 0.5px;
+}
+
+</style>
+<body id="page-top">
+
+<div class="container">
   {{ content }}
+</div>
 
-  {% include arrow_top.html %}
 </body>
 </html>

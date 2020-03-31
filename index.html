@@ -7,24 +7,45 @@ img: https://oduwsdl.github.io/dsa-puddles/assets/img/dsa-logo-monochrome-wb.png
 imgalt: Dark version of the Dark and Stormy Archives Logo
 ---
 
-<style>
-  img.blurimage {
-    -webkit-filter: grayscale(50%) blur(10px); /* Safari 6.0 - 9.0 */
-    filter: grayscale(50%) blur(10px);
-  }
-</style>
+
+<div class="mt-5 pt-5">
+
+<div class="row">
 
 {% for post in paginator.posts %}
-  <div class="chapter" style="border-width: 1px; border-color: white; border-style: solid;">
-    <a href="{{post.url | prepend: site.baseurl}}"  style="vertical-align: center;">
-      {% if post.img %}
-      <img src="{{post.img}}" alt="{{post.title}}">
-      {% endif %}
-    
-    <div class="chapter_inner" style="background-color: rgb(0, 0, 0, 0.5);">
-      <p class="chapter_number meta_text">{{post.date | date: '%Y, %b %d'}}</p>
-      <p class="chapter_title meta_text" style="font-size: 12pt;">{{post.title}}</p>
-    </div>
-    </a>
-  </div>
+
+	{% assign remainder = forloop.index0 | modulo:3 %}
+
+	{% if forloop.first != true %}
+
+		{% if remainder == 0 %}
+
+		</div>
+		<div class="row">
+
+		{% endif %}
+
+	{% endif %}
+
+	<div class="col-md-4">
+		<div class="chapter">
+		  <a href="{{post.url | prepend: site.baseurl}}"  style="vertical-align: center;">
+		    {% if post.img %}
+		    <img src="{{post.img}}" alt="{{post.title}}">
+		    {% endif %}
+
+		  <div class="chapter_inner" style="background-color: rgb(0, 0, 0, 0.5);">
+		    <p class="chapter_number meta_text">{{post.date | date: '%Y, %b %d'}}</p>
+		    <p class="chapter_title meta_text" style="font-size: 12pt;">{{post.title}}</p>
+		  </div>
+		  </a>
+		</div>
+
+	</div>
+
+
 {% endfor %}
+
+</div>
+
+</div>

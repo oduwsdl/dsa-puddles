@@ -8,7 +8,7 @@ layout: default
     <article class="post">
         <header>
             <div class="post_image">
-                <img src="{{ page.img }}" alt="{{ page.imgalt }}">
+                <img class="post_image" src="{{ page.img }}" alt="{{ page.imgalt }}">
             </div>
             <div class="post_description">
                 <h1 class="post_title meta_text">{{ page.title }}</h1>
@@ -65,7 +65,8 @@ layout: default
 
         </div> -->
   
-        <div class="entry_content">
+        <div class="row">
+        <div class="col ml-5 mr-5">
 
 
 
@@ -73,6 +74,11 @@ layout: default
 
 
 <hr>
+        </div>
+        </div>
+
+        <div class="row">
+        <div class="col">
 
 <div style="background-color: #262626; padding: 32px; color: #ffffff;">
     <hr>
@@ -97,12 +103,23 @@ layout: default
     <hr>
 </div>
 
+        </div>
+        </div>
+
+        <div class="row">
+        <div class="col ml-5 mr-5 mt-5 border-top">
+
 {% include storygraph-story-constructed.html %}
+        </div>
+        </div>
   
 
   
+        <div class="row">
+        <div class="col ml-5 mr-5 border-top">
 {% include dsa-more-information-footer.html %}
 
+        </div>
         </div>
     </article>
 </main> <!-- End Section Post Content -->

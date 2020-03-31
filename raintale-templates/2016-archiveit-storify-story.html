@@ -10,6 +10,7 @@ story_type: {% raw %} {{ story_type }} {% endraw %}
 generated_by: {{ generated_by }}
 collection_url: {{ collection_url }}
 collection_id: {% raw %} {{ collection_id }} {% endraw %}
+collection_name: {{ title }}
 ---
 
 
@@ -34,11 +35,12 @@ collection_id: {% raw %} {{ collection_id }} {% endraw %}
             data-original-link-status="{{ element.surrogate.original_linkstatus }}"
             data-versiondate="{{ element.surrogate.memento_datetime.strftime('%Y-%m-%dT%H:%M:%SZ') }}"
             style="
-                width: 100%; 
+                width: 502px; 
                 font-size: 12px;
                 border: 1px solid rgb(231, 231, 231);
                 background: center center no-repeat fixed rgb(255, 255, 255);
-                margin: auto;
+                margin: 0 auto;
+                margin-bottom: 33px;
                 padding: 0px;
                 line-height: 19.6px;
                 display: table;
@@ -80,7 +82,7 @@ collection_id: {% raw %} {{ collection_id }} {% endraw %}
                             href="{{ element.surrogate.urim }}"
                             style="
                                 text-decoration: none;
-                                color: rgb(9, 116, 255);
+                                color: rgb(0, 116, 183);
                                 background: center center no-repeat fixed rgb(255, 255, 255);
                                 margin: 0px;
                                 padding: 0px;
@@ -134,7 +136,7 @@ collection_id: {% raw %} {{ collection_id }} {% endraw %}
                         href="{{ element.surrogate.urim }}"
                         style="
                             text-decoration: none;
-                            color: rgb(9, 116, 255);
+                            color: rgb(0, 116, 183);
                             background: center center no-repeat fixed rgb(255, 255, 255);
                             margin: 0px;
                             padding: 0px;">{{ element.surrogate.original_domain }}&nbsp;&nbsp;@&nbsp;&nbsp;{{ element.surrogate.memento_datetime.strftime('%Y-%m-%dT%H:%M:%SZ') }}</a>

@@ -39,7 +39,7 @@ set +e
 echo ${bfilename} | grep 1s_
 status=$?
 if [ $status == 0 ]; then
-    generated_by="expert archivist"
+    generated_by="an expert archivist"
     post_layout="archiveit_curator_2016_post"
 fi
 set -e
@@ -48,7 +48,7 @@ set +e
 echo ${bfilename} | grep 0s_
 status=$?
 if [ $status == 0 ]; then
-    generated_by="2016 DSA Code"
+    generated_by="the 2016 DSA software"
     post_layout="archiveit_dsacode_2016_post"
 fi
 set -e

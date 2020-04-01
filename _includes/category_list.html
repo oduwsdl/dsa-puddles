@@ -1,0 +1,20 @@
+<div class="mt-2 pt-2" style="
+border-top-color: #ffffff;
+border-top-width: 1px;
+border-top-style: solid;
+">
+<p class="text-center" style="font-size: 12pt; color: #ffffff;">Browse By Post Category</p>
+<ul class="list-inline text-center">
+
+    <li class="list-inline-item text-center" style="color: #ffffff;">| <a href='/dsa-puddles/' class="storynav">All</a> |</li>
+    
+{% for category in site.categories %}
+
+  {% capture category_name %}{{ category | first }}{% endcapture %}
+  <li class="list-inline-item text-center" style="color: #ffffff;">| <a href='/dsa-puddles/categories/{{ category_name | replace: " ", "_" }}/' class="storynav">{{ category_name }}</a> |</li>
+
+  
+
+{% endfor %}
+</ul>
+</div>

@@ -1,0 +1,56 @@
+---
+layout: default
+---
+
+{% include header.html %}
+
+<div class="row mt-5 pt-5">
+    <div class="col text-center">
+<h1 style="color: #ffffff;">Category: {{ page.category }}</h1>
+    </div>
+</div>
+
+<div class="mt-2 pt-2">
+
+    <div class="row">
+
+{% for post in site.categories[page.category] %}
+
+    {% assign remainder = forloop.index | modulo: 3 %}
+
+  <div class="col">
+    <div class="chapter">
+      <a href="{{post.url | prepend: site.baseurl}}"  style="vertical-align: center;">
+        {% if post.img %}
+        <img src="{{post.img}}" alt="{{post.title}}">
+        {% endif %}
+
+      <div class="chapter_inner" style="background-color: rgb(0, 0, 0, 0.5);">
+        <p class="chapter_number meta_text">{{post.date | date: '%Y, %b %d'}}</p>
+        <p class="chapter_title meta_text" style="font-size: 12pt;">{{post.title}}</p>
+      </div>
+      </a>
+    </div>
+
+    </div>
+
+{% endfor %}
+
+{% if remainder == 2 %}
+
+<div class="col"></div>
+
+{% elsif remainder == 1 %}
+
+<div class="col"></div>
+<div class="col"></div>
+
+{% endif %}
+
+</div>
+
+</div>
+
+{% include category_list.html %}
+
+{% include footer.html %}

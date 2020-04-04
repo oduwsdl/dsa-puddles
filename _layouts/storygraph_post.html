@@ -93,12 +93,9 @@ layout: default
                             border-left-width: 1px;
                         ">
                                 {% assign entities = page.entities | split: ', ' %}
-                                {% for entity in entities %}
-                                    <a class="storynav" href="https://en.wikipedia.org/wiki/{{ entity }}">{{ entity }}</a>
-                                    {% if forloop.index != forloop.length %}
-                                        ,
-                                    {% endif %}
-                                {% endfor %}
+                                {% for entity in entities -%}
+                                    <a class="storynav" href="https://en.wikipedia.org/wiki/{{ entity }}">{{ entity }}</a>{% if forloop.index != forloop.length -%}, {% endif -%}
+                                {% endfor -%}
                         </div>
                     </div>
                     <div class="row">

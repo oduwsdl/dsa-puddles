@@ -1,5 +1,7 @@
 #!/bin/bash
 
+export PATH=/usr/local/bin:$PATH
+
 set -e
 set -x
 
@@ -128,7 +130,7 @@ if [ ! -e ${small_striking_image} ]; then
     striking_image_url=`grep "^img:" ${jekyll_story_file} | awk '{ print $2 }'`
 
     if [ ! -e ${working_directory}/${post_date}-striking-image.dat ]; then
-        /usr/local/bin/wget -O ${working_directory}/${post_date}-striking-image.dat ${striking_image_url}
+        wget -O ${working_directory}/${post_date}-striking-image.dat ${striking_image_url}
     else
         echo "already downloaded image from ${striking_image_url}"
     fi

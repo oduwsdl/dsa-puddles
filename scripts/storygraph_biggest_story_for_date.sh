@@ -6,8 +6,8 @@ source /usr/local/bin/virtualenvwrapper.sh
 post_date=$1
 working_directory=$2
 
-if [ -n $3 ]; then
-    if [ $3 == "--purge" ]; then
+if [ -n ${3+x} ]; then
+    if [ "$3" == "--purge" ]; then
         rm -rf ${working_directory}
         rm /Users/smj/Unsynced-Projects/dsa-puddles/_posts/${post_date}-storygraph-bigstory.html
         rm /Users/smj/Unsynced-Projects/dsa-puddles/assets/img/storygraph_striking_images/${post_date}.png

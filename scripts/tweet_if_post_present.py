@@ -46,6 +46,6 @@ api = twitter.Api(
 
 logger.info("tweeting message")
 
-api.PostUpdate(tweet_message)
+api.PostUpdate(tweet_message[0:250] + "..." + "\n" + post_url)
 
 logger.info("Tweet should be available now")

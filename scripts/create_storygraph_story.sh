@@ -131,6 +131,7 @@ if [ ! -e ${small_striking_image} ]; then
 
     if [ ! -e ${working_directory}/${post_date}-striking-image.dat ]; then
         wget -O ${working_directory}/${post_date}-striking-image.dat ${striking_image_url}
+        # TODO: download again if size is 0
     else
         echo "already downloaded image from ${striking_image_url}"
     fi
@@ -147,14 +148,16 @@ if [ ! -e ${small_striking_image} ]; then
         echo "already resized image"
     fi
 
-    sed -i '' -e "s|^img: .*$|img: /dsa-puddles/${small_striking_image}|g" ${jekyll_story_file}
 else
     echo "already generated smaller striking image for ${small_striking_image}"
 fi
 
+# extra - fix the image every time in case we are rerun
+sed -i '' -e "s|^img: .*$|img: /dsa-puddles/${small_striking_image}|g" ${jekyll_story_file}
+
 # 9. Publish to GitHub Pages
-git pull
-git add ${jekyll_story_file}
-git add ${small_striking_image}
-git commit -m "adding storygraph story for ${post_date}"
-git push
+# git pull
+# git add ${jekyll_story_file}
+# git add ${small_striking_image}
+# git commit -m "adding storygraph story for ${post_date}"
+# git push

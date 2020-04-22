@@ -44,6 +44,7 @@ image_report=${working_directory}/imagedata.json
 sorted_mementos_file=${working_directory}/sorted-story-mementos.tsv
 story_data_file=${working_directory}/raintale-story.json
 jekyll_story_file=_posts/${post_date}-archiveit-collection-${collection_id}.html
+small_striking_image=assets/img/archiveit_striking_images/${post_date}-${collection_id}.png
 
 # 1. sample mementos from the collection
 if [ ! -e ${mementos_file} ]; then
@@ -101,10 +102,40 @@ else
     echo "already discovered ${story_data_file} so moving on to next command..."
 fi
 
-# 7. Generate Jekyll HTML file for the day's rank r story
+# 7. Generate Jekyll HTML file for the story
 if [ ! -e ${jekyll_story_file} ]; then
     echo "`date` --- executing command:::"
     tellstory -i ${story_data_file} --storyteller template --story-template raintale-templates/archiveit-collection-template1.html -o ${jekyll_story_file} --mementoembed_api ${mementoembed_endpoint} --generated-by "AlNoamany's Algorithm"
 else
     echo "already created story at ${jekyll_story_file}"
 fi
+
+# extra - swap the striking image with a smaller thumbnail so that the main page will load faster
+if [ ! -e ${small_striking_image} ]; then
+    striking_image_url=`grep "^img:" ${jekyll_story_file} | awk '{ print $2 }'`
+
+    if [ ! -e ${working_directory}/${post_date}-striking-image.dat ]; then
+        wget -O ${working_directory}/${post_date}-striking-image.dat ${striking_image_url}
+        # TODO: download again if size is 0
+    else
+        echo "already downloaded image from ${striking_image_url}"
+    fi
+
+    if [ ! -e ${working_directory}/${post_date}-striking-image-origsize.png ]; then
+        convert ${working_directory}/${post_date}-striking-image.dat ${working_directory}/${post_date}-striking-image-origsize.png
+    else
+        echo "already converted image to PNG"
+    fi
+
+    if [ ! -e ${small_striking_image} ]; then
+        convert ${working_directory}/${post_date}-striking-image-origsize.png -resize 368.391x245.531 ${small_striking_image}
+    else
+        echo "already resized image"
+    fi
+
+else
+    echo "already generated smaller striking image for ${small_striking_image}"
+fi
+
+# extra - fix the image every time in case we are rerun
+sed -i '' -e "s|^img: .*$|img: /dsa-puddles/${small_striking_image}|g" ${jekyll_story_file}

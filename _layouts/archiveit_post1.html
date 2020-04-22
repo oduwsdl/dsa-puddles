@@ -1,0 +1,191 @@
+---
+layout: default
+---
+{% include header.html %}
+
+
+<main class="post_content">
+    <article class="post">
+        <header style="height: 500px; background-color: black;">
+            <!-- cheese -->
+            <div class="post_image" style="background-color: black;">
+                <img class="post_image" src="{{ page.img }}" alt="{{ page.imgalt }}">
+            </div>
+            <div class="post_description">
+                <h1 class="post_title meta_text">{{ page.title }}</h1>
+                <p class="meta_text storynav" style="padding-left: 2%;">A collection curated by <a href="{{ page.collected_by_url }}" class="storynav">{{ page.collected_by }}</a></p>
+                <div class="meta_text" style="
+                        background-color: rgba(0, 0, 0, 0.6) !important;
+                        padding: 32px;
+                        color: #ffffff;font-size:
+                        12px;
+                        margin: 0;
+                        padding: 0;
+                    ">
+                    <div class="row">
+                    <div class="col" style="
+                        text-align: center; 
+                        border-bottom-width: 1px;
+                        border-bottom-color: #ffffff;
+                        border-bottom-style: dotted;
+                        border-top-width: 1px;
+                        border-top-color: #ffffff;
+                        border-top-style: dotted;
+                        margin-top: 10px;
+                        font-size: 14pt;
+                        ">
+                    A short summary story of {{ page.article_count }} documents automatically selected by {{ page.generated_by }}
+                    </div>
+                    </div>
+                    <div class="row" style="
+                        text-align: center; 
+                        border-bottom-width: 1px;
+                        border-bottom-color: #ffffff;
+                        border-bottom-style: dotted;
+                        font-size: 12pt;
+                    ">
+                    <div class="col" style="
+                        text-align: left;
+                        padding-left: 5%;
+                    ">
+                    {% if page.previous.url %}
+                        <a href="{{ site.baseurl}}{{ page.previous.url }}" class="storynav">&laquo; Previous Story</a>
+                    {% else %}
+                        &laquo; Previous Story
+                    {% endif %}
+                    </div>
+                    
+                    <div class="col" style="
+                        text-align: center;
+                    ">
+                    <a href="{{ page.collection_url }}" class="storynav">View the collection behind this story</a>
+                    </div>
+                    <div class="col" style="
+                        text-align: right;
+                        padding-right: 5%;
+                    ">
+                    {% if page.next.url %}
+                        <a href="{{ site.baseurl}}{{ page.next.url }}" class="storynav">Next Story &raquo;</a>
+                    {% else %}
+                        Next Story &raquo;
+                    {% endif %}
+                    </div>
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col" style="
+                            padding: 1%;
+                            padding-left: 5%;
+                            border-bottom-style: dotted;
+                            border-bottom-color: #ffffff;
+                            border-bottom-width: 1px;
+                        ">
+                            <strong>Most frequent entities</strong>
+                        </div>
+
+                        <div class="col" style="
+                            padding: 1%;
+                            padding-right: 5%;
+                            border-bottom-style: dotted;
+                            border-bottom-color: #ffffff;
+                            border-bottom-width: 1px;
+                            border-left-style: dotted;
+                            border-left-color: #ffffff;
+                            border-left-width: 1px;
+                        ">
+                                {% assign entities = page.entities | split: ', ' %}
+                                {% for entity in entities -%}
+                                    <a class="storynav" href="https://en.wikipedia.org/wiki/{{ entity }}">{{ entity }}</a>{% if forloop.index != forloop.length -%}, {% endif -%}
+                                {% endfor -%}
+                        </div>
+                    </div>
+                    <div class="row">
+
+                        <div class="col" style="
+                            padding: 1%;
+                            padding-left: 5%;
+                        ">
+                            <strong>Most frequent sumgrams</strong></td>
+                        </div>
+                        <div class="col" style="
+                            padding: 1%; 
+                            padding-right: 5%;
+                            border-left-style: dotted;
+                            border-left-color: #ffffff;
+                            border-left-width: 1px;
+                        ">
+                            {{ page.terms }}
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </header> <!-- End Header -->
+
+        <!-- <div class="entry_content" >
+
+        </div> -->
+  
+        <div class="row">
+        <div class="col ml-5 mr-5">
+
+
+
+{{ page.content }}
+
+
+<hr>
+        </div>
+        </div>
+
+        <div class="row">
+        <div class="col">
+
+<div style="background-color: #262626; padding: 32px; color: #ffffff;">
+    <hr>
+    <table border="0" width="100%">
+        <tr><td width="30%" style="text-align: left;">
+    {% if page.previous.url %}
+        <a href="{{ site.baseurl}}{{ page.previous.url }}"  class="storynav">&laquo; Previous Story</a>
+    {% else %}
+        &laquo; Previous Story
+    {% endif %}
+    </td><td width="40%" style="text-align: center;">
+        <a href="{{ page.collection_url }}" class="storynav">View the collection behind this story</a>
+    </td><td width="30%" style="text-align: right;">
+    {% if page.next.url %}
+        <a href="{{ site.baseurl}}{{ page.next.url }}"  class="storynav">Next Story &raquo;</a>
+    {% else %}
+        Next Story &raquo;
+    {% endif %}
+    </td>
+    </tr>
+    </table>
+    <hr>
+</div>
+
+        </div>
+        </div>
+
+        <div class="row">
+        <div class="col ml-5 mr-5 mt-5 border-top">
+
+{% include dsa1-story-constructed.html %}
+        </div>
+        </div>
+  
+
+  
+        <div class="row">
+        <div class="col ml-5 mr-5 border-top">
+{% include dsa-more-information-footer.html %}
+
+        </div>
+        </div>
+    </article>
+</main> <!-- End Section Post Content -->
+
+
+{% include footer.html %}

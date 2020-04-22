@@ -1,0 +1,36 @@
+<section>
+    <hr>
+    <p>
+        This story was constructed automatically by using an updated version of AlNoamany's Algorithm. For more information about how this algorithm was developed, how it works, and its evaluation, please consult:
+        <ul>
+            <li>Y. AlNoamany, M. C. Weigle, and M. L. Nelson, "<a href="https://doi.org/10.1145/3091478.3091508"></a>Generating Stories From Archived Collections</a>," in Proceedings of the 2017 ACM on Web Science Conference, pp. 309–318, ACM Press, 2017. <a href="https://doi.org/10.1145/3091478.3091508">https://doi.org/10.1145/3091478.3091508</a>.</li>
+            <li>Y. AlNoamany, M. C. Weigle, and M. L. Nelson, " <a href="https://arxiv.org/abs/1705.06218"></a>Stories From the Past Web</a>," Tech. Rep. 1705.06218, May, 2017. <a href="https://arxiv.org/abs/1705.06218">https://arxiv.org/abs/1705.06218</a>.</li>
+        </ul>
+    </p>
+
+    <p>We employed the DSA toolkit to tell this story with the following steps.</p>
+
+    <ol>
+        <li>Hypercane selected the resources and generated the metadata for the story:</li>
+        <ol>
+            <li>It first executed AlNoamany's Algorithm:</li>
+            <ol>
+                <li>Discovered the Memento TimeMaps for the collection</li>
+                <li>Analyzed these TimeMaps and reported the memento URI-Ms that were on-topic</li>
+                <li>Filtered the content of those URI-Ms to find non-duplicates</li>
+                <li>Filtered the content of those URI-Ms to find English language documents</li>
+                <li>Sliced the collection by memento-datetime</li>
+                <li>Clustered the mementos in each slice by Simhash distance</li>
+                <li>Ranked the mementos in each cluster by a ranking equation</li>
+                <li>Filtered each cluster for the highest ranking mementos</li>
+                <li>Ordered each memento by publication date</li>
+            </ol>
+            <li>It used <a href="https://github.com/oduwsdl/archiveit_utilities">Archive-It Utilities</a> to extract all metadata from the collection, such as who created the collection and the collection's name</li>
+            <li>It analyzed all mementos to automatically discover the most frequent <a href="https://github.com/oduwsdl/sumgram">sumgrams</a> and named entities present in the overall story</li>
+            <li>It analyzed all images in these mementos to automatically select the best image for the overall story</li>
+            <li>It then formatted the data for the story based on all of this input</li>  
+        </ol>
+        <li><a href="https://oduwsdl.github.io/raintale/">Raintale</a> took the input from Hypercane and rendered the final product with information supplied by  <a href="https://mementoembed.readthedocs.io/en/latest/">MementoEmbed</a></li>
+    </ol>
+
+</section>

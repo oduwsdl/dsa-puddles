@@ -63,7 +63,7 @@ if [ ! -e ${original_resource_file} ]; then
     sg_fragment=`cat ${working_directory}/sg-output.txt | grep "maxgraph cursor:" | awk '{ print $3 }'`
     echo "${sg_base_uri}${sg_fragment}" > ${working_directory}/sg.url.txt
 
-    echo "URI-Rs" > ${original_resource_file}
+    echo "URI-R" > ${original_resource_file}
     cat ${working_directory}/graphs_links.txt >> ${original_resource_file}
 else
     echo "already discovered ${original_resource_file} so moving on to next command..."

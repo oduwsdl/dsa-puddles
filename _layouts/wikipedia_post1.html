@@ -1,0 +1,224 @@
+---
+layout: default
+---
+{% include header.html %}
+
+
+<main class="post_content">
+    <article class="post">
+        <header style="height: 500px; background-color: black;">
+            <!-- cheese -->
+            <div class="post_image" style="background-color: black;">
+                <img class="post_image" src="{{ page.img }}" alt="{{ page.imgalt }}">
+            </div>
+            <div class="post_description">
+                <h1 class="post_title meta_text">{{ page.title }}</h1>
+                <p class="meta_text storynav" style="padding-left: 2%;">A summary story built from the reference section of the Wikipedia Article <em><a href="{{ page.collection_url }}" class="storynav">{{ page.article_title }}</a></em></p>
+                <div class="meta_text" style="
+                        background-color: rgba(0, 0, 0, 0.6) !important;
+                        padding: 32px;
+                        color: #ffffff;font-size:
+                        12px;
+                        margin: 0;
+                        padding: 0;
+                    ">
+                    <div class="row">
+                    <div class="col" style="
+                        text-align: center; 
+                        border-bottom-width: 1px;
+                        border-bottom-color: #ffffff;
+                        border-bottom-style: dotted;
+                        border-top-width: 1px;
+                        border-top-color: #ffffff;
+                        border-top-style: dotted;
+                        margin-top: 10px;
+                        font-size: 14pt;
+                        ">
+                    A short summary story of {{ page.article_count }} documents automatically selected by Hypercane's LDA topic modeling and DSA scoring commands
+                    </div>
+                    </div>
+                    <div class="row" style="
+                        text-align: center; 
+                        border-bottom-width: 1px;
+                        border-bottom-color: #ffffff;
+                        border-bottom-style: dotted;
+                        font-size: 12pt;
+                    ">
+                    <div class="col" style="
+                        text-align: left;
+                        padding-left: 5%;
+                    ">
+                    {% if page.previous.url %}
+                        <a href="{{ site.baseurl}}{{ page.previous.url }}" class="storynav">&laquo; Previous Story</a>
+                    {% else %}
+                        &laquo; Previous Story
+                    {% endif %}
+                    </div>
+                    
+                    <div class="col" style="
+                        text-align: center;
+                    ">
+                    <a href="{{ page.collection_url }}" class="storynav">View the Wikipedia article behind this story</a>
+                    </div>
+                    <div class="col" style="
+                        text-align: right;
+                        padding-right: 5%;
+                    ">
+                    {% if page.next.url %}
+                        <a href="{{ site.baseurl}}{{ page.next.url }}" class="storynav">Next Story &raquo;</a>
+                    {% else %}
+                        Next Story &raquo;
+                    {% endif %}
+                    </div>
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col" style="
+                            padding: 1%;
+                            padding-left: 5%;
+                            border-bottom-style: dotted;
+                            border-bottom-color: #ffffff;
+                            border-bottom-width: 1px;
+                        ">
+                            <strong>Most frequent entities</strong>
+                        </div>
+
+                        <div class="col" style="
+                            padding: 1%;
+                            padding-right: 5%;
+                            border-bottom-style: dotted;
+                            border-bottom-color: #ffffff;
+                            border-bottom-width: 1px;
+                            border-left-style: dotted;
+                            border-left-color: #ffffff;
+                            border-left-width: 1px;
+                        ">
+                                {% assign entities = page.entities | split: ', ' %}
+                                {% for entity in entities -%}
+                                    <a class="storynav" href="https://en.wikipedia.org/wiki/{{ entity }}">{{ entity }}</a>{% if forloop.index != forloop.length -%}, {% endif -%}
+                                {% endfor -%}
+                        </div>
+                    </div>
+                    <div class="row">
+
+                        <div class="col" style="
+                            padding: 1%;
+                            padding-left: 5%;
+                        ">
+                            <strong>Most frequent sumgrams</strong></td>
+                        </div>
+                        <div class="col" style="
+                            padding: 1%; 
+                            padding-right: 5%;
+                            border-left-style: dotted;
+                            border-left-color: #ffffff;
+                            border-left-width: 1px;
+                        ">
+                            {{ page.terms }}
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </header> <!-- End Header -->
+
+        <!-- <div class="entry_content" >
+
+        </div> -->
+  
+        <div class="row">
+        <div class="col ml-5 mr-5">
+
+
+
+{{ page.content }}
+
+
+<hr>
+        </div>
+        </div>
+
+        <div class="row">
+        <div class="col">
+
+<div style="background-color: #262626; padding: 32px; color: #ffffff;">
+    <hr>
+    <table border="0" width="100%">
+        <tr><td width="30%" style="text-align: left;">
+    {% if page.previous.url %}
+        <a href="{{ site.baseurl}}{{ page.previous.url }}"  class="storynav">&laquo; Previous Story</a>
+    {% else %}
+        &laquo; Previous Story
+    {% endif %}
+    </td><td width="40%" style="text-align: center;">
+        <a href="{{ page.collection_url }}" class="storynav">View the collection behind this story</a>
+    </td><td width="30%" style="text-align: right;">
+    {% if page.next.url %}
+        <a href="{{ site.baseurl}}{{ page.next.url }}"  class="storynav">Next Story &raquo;</a>
+    {% else %}
+        Next Story &raquo;
+    {% endif %}
+    </td>
+    </tr>
+    </table>
+    <hr>
+</div>
+
+        </div>
+        </div>
+
+        <div class="row">
+        <div class="col ml-5 mr-5 mt-5 border-top">
+
+            <section>
+                <hr>
+                <p>
+                    This story was constructed automatically by using Latent Dirichlet Allocation topic modeling and an updated version of the scoring function from AlNoamany's Algorithm. For more information about LDA and this scoring function, please consult:
+                    <ul>
+                        <li>Y. AlNoamany, M. C. Weigle, and M. L. Nelson, "<a href="https://doi.org/10.1145/3091478.3091508"></a>Generating Stories From Archived Collections</a>," in Proceedings of the 2017 ACM on Web Science Conference, pp. 309–318, ACM Press, 2017. <a href="https://doi.org/10.1145/3091478.3091508">https://doi.org/10.1145/3091478.3091508</a>.</li>
+                        <li>Y. AlNoamany, M. C. Weigle, and M. L. Nelson, " <a href="https://arxiv.org/abs/1705.06218"></a>Stories From the Past Web</a>," Tech. Rep. 1705.06218, May, 2017. <a href="https://arxiv.org/abs/1705.06218">https://arxiv.org/abs/1705.06218</a>.</li>
+                        <li>R. Řehůřek and P. Sojka. "Software Framework for Topic Modelling with Large Corpora," in Proceedings of the LREC 2010 Workshop on New Challenges for NLP Frameworks, pp. 45-50, ELRA, 2010. <a href="http://is.muni.cz/publication/884893/en"></a>http://is.muni.cz/publication/884893/en</li>
+                        <li>Wikipedia contributors. (2020, September 4). Latent Dirichlet allocation. In Wikipedia, The Free Encyclopedia. Retrieved 16:38, October 28, 2020, from <a href="https://en.wikipedia.org/w/index.php?title=Latent_Dirichlet_allocation&oldid=976680107">https://en.wikipedia.org/w/index.php?title=Latent_Dirichlet_allocation&oldid=976680107</a></li>
+                    </ul>
+                </p>
+            
+                <p>We employed the DSA toolkit to tell this story with the following steps.</p>
+            
+                <ol>
+                    <li>A script used Beautiful Soup to scrape the links from the Wikipedia article and filtered the links so that only mementos were returned</li>
+                    <li><a href="https://ws-dl.blogspot.com/2020/06/2020-06-03-hypercane-part-1-intelligent.html">Hypercane</a> selected the resources and generated the metadata for the story:</li>
+                    <ol>
+                        <li>It first executed AlNoamany's Algorithm:</li>
+                        <ol>
+                            <li>Clustered the mementos in each slice by Gensim's LDA implementation</li>
+                            <li>Ranked the mementos in each cluster by the DSA scoring equation</li>
+                            <li>Filtered each cluster for the highest ranking mementos</li>
+                            <li>Ordered each memento by publication date</li>
+                        </ol>
+                        <li>It analyzed all mementos to automatically discover the most frequent <a href="https://github.com/oduwsdl/sumgram">sumgrams</a> and named entities present in the overall story</li>
+                        <li>It analyzed all images in these mementos to automatically select the best image for the overall story</li>
+                        <li>It then formatted the data for the story based on all of this input</li>  
+                    </ol>
+                    <li><a href="https://oduwsdl.github.io/raintale/">Raintale</a> took the input from Hypercane and rendered the final product with information supplied by  <a href="https://mementoembed.readthedocs.io/en/latest/">MementoEmbed</a></li>
+                </ol>
+            
+            </section>
+
+        </div>
+        </div>
+  
+
+  
+        <div class="row">
+        <div class="col ml-5 mr-5 border-top">
+{% include dsa-more-information-footer.html %}
+
+        </div>
+        </div>
+    </article>
+</main> <!-- End Section Post Content -->
+
+
+{% include footer.html %}
